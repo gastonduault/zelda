@@ -1,10 +1,46 @@
 /*  gcc src/main.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
     bin\prog.exe
 */
+
 #include <stdlib.h>
-#include "head.h"
 #include <stdio.h>
 #include <SDL.h>
+#include "head.h"
+
+#define WINDOW_WITDH 791
+#define WINDOW_HEIGHT 575
+
+SDL_Window *window = NULL;
+SDL_Renderer *renderer = NULL;
+
+SDL_Surface *fond = NULL;
+SDL_Texture *texture = NULL;
+SDL_Rect conteneurfond;
+
+void ExitWithError(const char *message)
+{
+    SDL_Log("Erreur : %s > %s\n", message, SDL_GetError());
+    SDL_Quit();
+    exit(EXIT_FAILURE);
+}
+
+void ExitChargement(const char *message, SDL_Renderer *rendu, SDL_Window *window)
+{
+    SDL_Log("Erreur : %s > %s\n", message, SDL_GetError());
+    SDL_DestroyRenderer(rendu);
+    SDL_DestroyWindow(window);
+}
+
+void limit_fps(unsigned int limit)
+{
+    unsigned int ticks = SDL_GetTicks(); //on synchronise le fps
+    if (limit < ticks)
+        return;
+    else if (limit > ticks + 16)
+        SDL_Delay(16);
+    else
+        SDL_Delay(limit - ticks);
+}
 
 int main(int argc, char **argv){
 
@@ -19,35 +55,29 @@ int main(int argc, char **argv){
     unsigned int fram_limit = 0;
     fram_limit = SDL_GetTicks() + 16; //delai pr limiter à 60fps
     limit_fps(fram_limit);
-    /*---------------------------------------------*/
+/*---------------------------------------------*/
     fond=SDL_LoadBMP("src/zeldamap.bmp");
     if(fond == NULL)
         ExitChargement("impossiblde de charger le fon", renderer, window);
+    
     texture = SDL_CreateTextureFromSurface(renderer, fond);
-    while(program_launched){
+    SDL_FreeSurface(fond);
+    if(texture == NULL)
+        ExitChargement("impossible de créer la texture", renderer, window);
+    
+    if(SDL_QueryTexture(texture, NULL, NULL, &conteneurfond.w, &conteneurfond.h) != 0)
+        ExitChargement("impossible charger le conteneur du fond", renderer, window);
+    
+    conteneurfond.x = (WINDOW_WITDH - conteneurfond.w) / 2;
+    conteneurfond.x = (WINDOW_HEIGHT - conteneurfond.h) / 2;
+    if(SDL_RenderCopy(renderer, texture, NULL, &conteneurfond)!=0)
+        ExitChargement("impossible d'afficher la texture",renderer,window);
+
+    SDL_RenderPresent(renderer);
+    while (program_launched){
         SDL_Event event;
-        while (SDL_PollEvent(&event))
-        {
-            switch (event.type)
-            {
-            /*case SDL_MOUSEBUTTONDOWN:
-                    
-                    SDL_BUTTON_LEFT SDL_BUTTON_RIGHT SDL_BUTTON_MIDDLE
-                    
-                    if(event.button.button == SDL_BUTTON_LEFT)
-                            printf("clic gauche \n");
-                        else if(event.button.button == SDL_BUTTON_RIGHT)
-                            printf("clic droit \n");
-                        else if (event.button.button == SDL_BUTTON_MIDDLE)
-                            printf("clic molette \n");
-                    break;
-                case SDL_WINDOWEVENT:
-                    if(event.window.event == SDL_WINDOWEVENT_LEAVE)
-                        printf("La souris est sortie de la fenêtre\n");
-                    else if(event.window.event == SDL_WINDOWEVENT_ENTER)
-                        printf("La souris est entré sur le fenêtre\n");
-                    break;
-                */
+        while (SDL_PollEvent(&event)){
+            switch (event.type){
             case SDL_QUIT:
                 program_launched = SDL_FALSE;
                 break;
@@ -58,9 +88,10 @@ int main(int argc, char **argv){
     }
 /*---------------------------------------------*/
 
-                    SDL_DestroyRenderer(renderer);
-                    SDL_DestroyWindow(window);
-                    SDL_Quit();
-                    return 0;
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+    return 0;
 }
 
