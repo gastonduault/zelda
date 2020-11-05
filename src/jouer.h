@@ -6,4 +6,6 @@ SDL_Renderer *rendu;
 SDL_Window *window;
 SDL_Rect positionfond;
 
+
+
 void jouer(SDL_Surface *fond);
