@@ -1,14 +1,13 @@
 
-
 #define WINDOW_WITDH 791
 #define WINDOW_HEIGHT 575
 
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
-
 SDL_Surface *fond = NULL;
+SDL_Surface *menu = NULL;
 SDL_Texture *texture = NULL;
-SDL_Rect conteneurfond;
+SDL_Rect positionMenu;
 
 void ExitWithError(const char *message)
 {

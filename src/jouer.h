@@ -1,7 +1,9 @@
-#ifndef JOUER_H_INCLUED
-#define JOUER_H_INCLUED
+#define WINDOW_WITDH 791
+#define WINDOW_HEIGHT 575
 
-void jouer(SDL_Surface* s);
+SDL_Texture *texture;
+SDL_Renderer *rendu;
+SDL_Window *window;
+SDL_Rect positionfond;
 
-
-#endif
+void jouer(SDL_Surface *fond);
