@@ -1,15 +1,12 @@
-/*  gcc src/*.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
-    bin\prog.exe
-*/
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL.h>
 #include <stdbool.h>
 #include "main.h"
 #include "jouer.h"
-
-
+/*  gcc src/*.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
+    bin\prog.exe
+*/
 int main(int argc, char **argv){
 
     if(SDL_Init(SDL_INIT_EVERYTHING)!=0)
