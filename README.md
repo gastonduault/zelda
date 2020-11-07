@@ -28,3 +28,11 @@ Petit jeu en C avec la bibliothèque SDL 2.0
         <strong>Quitter :</strong>Touche échape
     </li>
 </ul>
+
+<br />
+<img src="src/zeldamap.bmp">
+<hr />
+<img src="src/linkB.bmp">
+<img src="src/linkG.bmp">
+<img src="src/linkR.bmp">
+<img src="src/linkH.bmp">
