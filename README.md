@@ -1,5 +1,5 @@
 <h1>Zelda</h1> 
-Encore en cour de création 
+Encore en cour de création >> la carte est terminé pour seulement la première moitié (a droite)
 
 Petit jeu en C avec la bibliothèque SDL 2.0
 
