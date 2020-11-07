@@ -345,19 +345,39 @@ void jouer(SDL_Surface *fond){
     carte[17][2] = 1;
     carte[17][3] = 1;
     carte[17][4] = 1;
+    carte[18][10] = 1;
+    carte[18][11] = 1;
+    carte[18][12] = 1;
+    carte[18][13] = 1;
     carte[18][4] = 1;
     carte[19][4] = 1;
+    carte[19][10] = 1;
+    carte[19][13] = 1;
     carte[20][4] = 1;
+    carte[20][10] = 1;
+    carte[20][13] = 1;
     carte[21][4] = 1;
+    carte[21][6] = 1;
+    carte[21][7] = 1;
+    carte[21][10] = 1;
+    carte[21][13] = 1;
+    carte[21][12] = 1;
+    carte[21][11] = 1;
     carte[22][4] = 1;
+    carte[22][6] = 1;
+    carte[22][7] = 1;
     carte[23][4] = 1;
     carte[24][4] = 1;
     carte[25][5] = 1;
     carte[25][6] = 1;
+    carte[25][10] = 1;
+    carte[25][11] = 1;
     carte[26][6] = 1;
     carte[26][7] = 1;
     carte[26][8] = 1;
     carte[27][8] = 1;
+    carte[26][10] = 1;
+    carte[26][10] = 1;
     carte[28][8] = 1;
     carte[29][8] = 1;
     carte[30][8] = 1;
@@ -403,7 +423,7 @@ void jouer(SDL_Surface *fond){
 
     SDL_Event event;
     while (continuer!=0){
-        SDL_Texture *textM;
+        /*SDL_Texture *textM;
         for (i = 0; i < 35; i++)
         {
             for (j = 0; j < 26; j++)
@@ -428,7 +448,7 @@ void jouer(SDL_Surface *fond){
                     break;
                 }
             }
-        }
+        }*/
         while (SDL_PollEvent(&event))
         {
             if (keys[SDL_SCANCODE_UP]){
