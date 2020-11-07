@@ -1,5 +1,5 @@
-#define WINDOW_WITDH 791
-#define WINDOW_HEIGHT 575
+#define WINDOW_WITDH 800
+#define WINDOW_HEIGHT 600
 
 SDL_Texture *texture;
 SDL_Renderer *rendu;

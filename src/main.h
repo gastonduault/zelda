@@ -1,6 +1,6 @@
 
-#define WINDOW_WITDH 791
-#define WINDOW_HEIGHT 575
+#define WINDOW_WITDH 800
+#define WINDOW_HEIGHT 600
 
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
