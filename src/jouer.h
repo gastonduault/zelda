@@ -7,6 +7,8 @@ SDL_Window *window;
 SDL_Rect positionfond;
 
 
-void deplacerjoueur(int carte[][26], SDL_Rect *pos, int direction);
+void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction);
 
 void jouer(SDL_Surface *fond);
+
+//affiche Mur

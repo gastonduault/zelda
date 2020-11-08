@@ -10,16 +10,12 @@ SDL_Rect position, positionjoueur;
 void jouer(SDL_Surface *fond){
     SDL_Surface *Link[4]={NULL};
     SDL_Surface *LinkActuel=NULL;
-
-    SDL_Surface *mur=NULL;
-    mur=SDL_LoadBMP("src/mur.bmp");
-
     int continuer = 1;
     int i = 0, j = 0;
-    int carte[35][26];
+    int carte[35][45];
     for (i = 0; i < 34; i++)
         {
-            for (j = 0; j < 26; j++)
+            for (j = 0; j < 45; j++)
             {
                 carte[i][j] = 0;
             }
@@ -49,7 +45,12 @@ void jouer(SDL_Surface *fond){
     carte[0][22] = 0;
     carte[0][23] = 0;
     carte[0][24] = 0;
-    carte[0][25] = 0;
+    carte[0][25] = 1;
+    carte[0][26] = 1;
+    carte[0][27] = 1;
+    carte[0][28] = 1;
+    carte[0][29] = 1;
+    carte[0][30] = 1;
     carte[1][0] = 1;
     carte[1][1] = 0;
     carte[1][2] = 1;
@@ -66,16 +67,17 @@ void jouer(SDL_Surface *fond){
     carte[1][13] = 1;
     carte[1][14] = 1;
     carte[1][15] = 1;
-    carte[1][16] = 0;
-    carte[1][17] = 0;
-    carte[1][18] = 0;
-    carte[1][19] = 0;
+    carte[1][16] = 1;
+    carte[1][17] = 1;
+    carte[1][18] = 1;
+    carte[1][19] = 1;
     carte[1][20] = 0;
     carte[1][21] = 0;
-    carte[1][22] = 0;
-    carte[1][23] = 0;
-    carte[1][24] = 0;
+    carte[1][22] = 1;
+    carte[1][23] = 1;
+    carte[1][24] = 1;
     carte[1][25] = 0;
+    carte[1][29] = 1;
     carte[2][0] = 1;
     carte[2][1] = 0;
     carte[2][2] = 1;
@@ -92,16 +94,17 @@ void jouer(SDL_Surface *fond){
     carte[2][13] = 0;
     carte[2][14] = 0;
     carte[2][15] = 1;
-    carte[2][16] = 0;
     carte[2][17] = 0;
     carte[2][18] = 0;
-    carte[2][19] = 0;
-    carte[2][20] = 0;
-    carte[2][21] = 0;
-    carte[2][22] = 0;
+    carte[2][19] = 1;
+    carte[2][20] = 1;
+    carte[2][21] = 1;
+    carte[2][22] = 1;
     carte[2][23] = 0;
     carte[2][24] = 0;
     carte[2][25] = 0;
+    carte[2][31] = 1;
+    carte[2][30] = 1;
     carte[3][0] = 1;
     carte[3][1] = 0;
     carte[3][2] = 1;
@@ -124,10 +127,12 @@ void jouer(SDL_Surface *fond){
     carte[3][19] = 0;
     carte[3][20] = 0;
     carte[3][21] = 0;
-    carte[3][22] = 0;
-    carte[3][23] = 0;
-    carte[3][24] = 0;
+    carte[3][22] = 1;
+    carte[3][23] = 1;
+    carte[3][24] = 1;
     carte[3][25] = 0;
+    carte[3][32] = 1;
+    carte[3][31] = 1;
     carte[4][0] = 1;
     carte[4][1] = 0;
     carte[4][2] = 0;
@@ -152,8 +157,10 @@ void jouer(SDL_Surface *fond){
     carte[4][21] = 0;
     carte[4][22] = 0;
     carte[4][23] = 0;
-    carte[4][24] = 0;
-    carte[4][25] = 0;
+    carte[4][24] = 1;
+    carte[4][25] = 1;
+    carte[4][26] = 1;
+    carte[4][32] = 1;
     carte[5][0] = 1;
     carte[5][1] = 0;
     carte[5][2] = 0;
@@ -179,8 +186,12 @@ void jouer(SDL_Surface *fond){
     carte[5][22] = 0;
     carte[5][23] = 0;
     carte[5][24] = 0;
-    carte[5][25] = 0;
-    carte[5][25] = 0;
+    carte[5][25] = 1;
+    carte[5][26] = 1;
+    carte[5][27] = 1;
+    carte[5][34] = 1;
+    carte[5][33] = 1;
+    carte[5][32] = 1;
     carte[6][0] = 1;
     carte[6][1] = 0;
     carte[6][2] = 0;
@@ -207,6 +218,9 @@ void jouer(SDL_Surface *fond){
     carte[6][23] = 0;
     carte[6][24] = 0;
     carte[6][25] = 0;
+    carte[6][26] = 0;
+    carte[6][27] = 1;
+    carte[6][35] = 1;
     carte[7][0] = 1;
     carte[7][1] = 0;
     carte[7][2] = 0;
@@ -233,6 +247,8 @@ void jouer(SDL_Surface *fond){
     carte[7][23] = 0;
     carte[7][24] = 0;
     carte[7][25] = 0;
+    carte[7][28] = 1;
+    carte[7][35] = 1;
     carte[8][0] = 1;
     carte[8][1] = 0;
     carte[8][2] = 0;
@@ -259,6 +275,8 @@ void jouer(SDL_Surface *fond){
     carte[8][23] = 0;
     carte[8][24] = 0;
     carte[8][25] = 0;
+    carte[8][28] = 1;
+    carte[8][35] = 1;
     carte[9][0] = 1;
     carte[9][1] = 0;
     carte[9][2] = 0;
@@ -285,6 +303,9 @@ void jouer(SDL_Surface *fond){
     carte[9][23] = 0;
     carte[9][24] = 0;
     carte[9][25] = 0;
+    carte[9][28] = 1;
+    carte[9][36] = 1;
+    carte[9][35] = 1;
     carte[10][0] = 1;
     carte[10][1] = 0;
     carte[10][2] = 0;
@@ -313,6 +334,8 @@ void jouer(SDL_Surface *fond){
     carte[10][23] = 0;
     carte[10][24] = 0;
     carte[10][25] = 0;
+    carte[10][28] = 1;
+    carte[10][36] = 1;
     carte[11][0] = 1;
     carte[11][5] = 1;
     carte[11][7] = 1;
@@ -320,11 +343,15 @@ void jouer(SDL_Surface *fond){
     carte[11][10] = 1;
     carte[11][11] = 1;
     carte[11][12] = 1;
+    carte[11][28] = 1;
+    carte[11][35] = 1;
     carte[12][0] = 1;
     carte[12][5] = 1;
     carte[12][7] = 1;
     carte[12][9] = 1; // buche
     carte[12][12] = 1;
+    carte[12][27] = 1;
+    carte[12][36] = 1;
     carte[13][0] = 1;
     carte[13][1] = 1;
     carte[13][2] = 1;
@@ -338,24 +365,66 @@ void jouer(SDL_Surface *fond){
     carte[13][10] = 1;
     carte[13][11] = 1;
     carte[13][12] = 1;
+    carte[13][26] = 1;
+    carte[13][25] = 1;
+    carte[13][24] = 1;
+    carte[13][37] = 1;
     carte[14][0] = 1;
+    carte[14][24] = 1;
     carte[15][0] = 1;
+    carte[15][24] = 1;
+    carte[15][16] = 1;
+    carte[15][17] = 1;
+    carte[15][39] = 1;
+    carte[14][38] = 1;
+    carte[14][37] = 1;
     carte[16][0] = 1;
     carte[16][1] = 1;
+    carte[16][24] = 1;
+    carte[16][23] = 1;
+    carte[16][20] = 1;
+    carte[16][16] = 1;
+    carte[16][17] = 1;
+    carte[16][39] = 1;
     carte[17][2] = 1;
+    carte[17][24] = 1;
+    carte[17][23] = 1;
+    carte[17][20] = 1;
+    carte[17][19] = 1;
     carte[17][3] = 1;
     carte[17][4] = 1;
+    carte[17][40] = 1;
     carte[18][10] = 1;
     carte[18][11] = 1;
     carte[18][12] = 1;
     carte[18][13] = 1;
     carte[18][4] = 1;
+    carte[18][19] = 1;
+    carte[18][40] = 1;
+    carte[18][41] = 1;
+    carte[18][42] = 1;
+    carte[18][43] = 1;
+    carte[19][43] = 1;
     carte[19][4] = 1;
     carte[19][10] = 1;
     carte[19][13] = 1;
+    carte[19][19] = 1;
+    carte[19][28] = 1;
+    carte[19][27] = 1;
     carte[20][4] = 1;
     carte[20][10] = 1;
     carte[20][13] = 1;
+    carte[20][19] = 1;
+    carte[20][39] = 1;
+    carte[20][40] = 1;
+    carte[20][41] = 1;
+    carte[20][42] = 1;
+    carte[20][43] = 1;
+    carte[20][28] = 1;
+    carte[20][27] = 1;
+    carte[20][29] = 1;
+    carte[21][28] = 1;
+    carte[21][29] = 1;
     carte[21][4] = 1;
     carte[21][6] = 1;
     carte[21][7] = 1;
@@ -363,28 +432,88 @@ void jouer(SDL_Surface *fond){
     carte[21][13] = 1;
     carte[21][12] = 1;
     carte[21][11] = 1;
+    carte[21][19] = 1;
+    carte[21][39] = 1;
     carte[22][4] = 1;
     carte[22][6] = 1;
     carte[22][7] = 1;
+    carte[15][29] = 1;
+    carte[15][28] = 1;
+    carte[16][28] = 1;
+    carte[16][29] = 1;
+    carte[22][19] = 1;
+    carte[22][38] = 1;
     carte[23][4] = 1;
+    carte[23][19] = 1;
+    carte[23][38] = 1;
+    carte[23][37] = 1;
+    carte[23][36] = 1;
+    carte[23][35] = 1;
+    carte[24][38] = 1;
     carte[24][4] = 1;
+    carte[24][19] = 1;
+    carte[24][20] = 1;
+    carte[24][21] = 1;
+    carte[24][27] = 1;
+    carte[24][28] = 1;
     carte[25][5] = 1;
     carte[25][6] = 1;
     carte[25][10] = 1;
     carte[25][11] = 1;
+    carte[25][21] = 1;
+    carte[25][22] = 1;
+    carte[25][35] = 1;
+    carte[25][36] = 1;
+    carte[25][37] = 1;
+    carte[25][30] = 1;
+    carte[25][31] = 1;
+    carte[25][38] = 1;
+    carte[25][27] = 1;
+    carte[25][28] = 1;
+    carte[25][26] = 1;
     carte[26][6] = 1;
     carte[26][7] = 1;
     carte[26][8] = 1;
+    carte[26][23] = 1;
+    carte[26][24] = 1;
+    carte[26][26] = 1;
+    carte[26][27] = 1;
     carte[27][8] = 1;
-    carte[26][10] = 1;
+    carte[27][24] = 1;
     carte[26][10] = 1;
     carte[28][8] = 1;
+    carte[28][24] = 1;
+    carte[27][25] = 1;
+    carte[27][26] = 1;
+    carte[27][27] = 1;
+    carte[27][28] = 1;
+    carte[27][29] = 1;
+    carte[27][30] = 1;
+    carte[26][31] = 1;
+    carte[26][32] = 1;
+    carte[26][33] = 1;
+    carte[26][34] = 1;
+    carte[29][23] = 1;
     carte[29][8] = 1;
     carte[30][8] = 1;
+    carte[30][19] = 1;
+    carte[30][18] = 1;
+    carte[30][17] = 1;
+    carte[30][23] = 1;
     carte[31][8] = 1;
+    carte[31][23] = 1;
+    carte[31][23] = 1;
+    carte[31][22] = 1;
+    carte[31][21] = 1;
+    carte[31][20] = 1;
+    carte[31][19] = 1;
+    carte[31][16] = 1;
+    carte[32][16] = 1;
     carte[32][8] = 1;
     carte[33][8] = 1;
+    carte[33][16] = 1;
     carte[34][8] = 1;
+    carte[34][16] = 1;
     carte[34][9] = 1;
     carte[34][10] = 1;
     carte[34][11] = 1;
@@ -400,7 +529,7 @@ void jouer(SDL_Surface *fond){
     LinkActuel=Link[BAS];
     positionjoueur.x=3;
     positionjoueur.y=3;
-    carte[4][5]=LINK;
+    carte[6][20]=LINK;
     bool keys[322] = {false};
 
     fond = SDL_LoadBMP("src/zeldamap.bmp");
@@ -424,9 +553,12 @@ void jouer(SDL_Surface *fond){
     SDL_Event event;
     while (continuer!=0){
         /*SDL_Texture *textM;
+        SDL_Surface *mur = NULL;
+        mur = SDL_LoadBMP("src/mur.bmp");
+
         for (i = 0; i < 35; i++)
         {
-            for (j = 0; j < 26; j++)
+            for (j = 0; j < 50; j++)
             {
                 position.x = j * TAILLE_BLOC;
                 position.y = i * TAILLE_BLOC;
@@ -515,7 +647,7 @@ void jouer(SDL_Surface *fond){
     }
 }
 
-void deplacerjoueur(int carte[34][26], SDL_Rect *pos, int direction){
+void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction){
     switch (direction)
     {
     case HAUT:
