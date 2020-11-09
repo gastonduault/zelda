@@ -527,9 +527,9 @@ void jouer(SDL_Surface *fond){
     Link[GAUCHE] = SDL_LoadBMP("src/linkG.bmp");
     Link[DROITE] = SDL_LoadBMP("src/linkR.bmp");
     LinkActuel=Link[BAS];
-    positionjoueur.x=3;
-    positionjoueur.y=3;
-    carte[6][20]=LINK;
+    positionjoueur.x=6;
+    positionjoueur.y=6;
+    carte[6][6]=LINK;
     bool keys[322] = {false};
 
     fond = SDL_LoadBMP("src/zeldamap.bmp");
@@ -552,35 +552,6 @@ void jouer(SDL_Surface *fond){
 
     SDL_Event event;
     while (continuer!=0){
-        /*SDL_Texture *textM;
-        SDL_Surface *mur = NULL;
-        mur = SDL_LoadBMP("src/mur.bmp");
-
-        for (i = 0; i < 35; i++)
-        {
-            for (j = 0; j < 50; j++)
-            {
-                position.x = j * TAILLE_BLOC;
-                position.y = i * TAILLE_BLOC;
-                switch (carte[i][j])
-                {
-                case MUR:
-                    textM = SDL_CreateTextureFromSurface(rendu, mur);
-                    if (SDL_QueryTexture(textM, NULL, NULL, &position.w, &position.h) != 0)
-                    {
-                        printf("impossible charger le conteneur de mur");
-                        SDL_QUIT;
-                    }
-                    if (SDL_RenderCopy(rendu, textM, NULL, &position) != 0)
-                    {
-                        printf("impossible d'afficher la texture de mur");
-                        SDL_QUIT;
-                    }
-                    SDL_RenderPresent(rendu);
-                    break;
-                }
-            }
-        }*/
         while (SDL_PollEvent(&event))
         {
             if (keys[SDL_SCANCODE_UP]){
@@ -600,6 +571,9 @@ void jouer(SDL_Surface *fond){
                 deplacerjoueur(carte, &positionjoueur, GAUCHE);
             }
             switch (event.type){
+            case SDL_QUIT:
+                continuer = 0;
+                break;
             case SDL_KEYUP:
                 keys[event.key.keysym.scancode] = false;
                 break;
@@ -612,11 +586,6 @@ void jouer(SDL_Surface *fond){
                     break;
                 }
             break;
-            case SDL_QUIT:
-                continuer = 0;
-                break;
-            default:
-                break;
             }
         }
 
@@ -645,6 +614,10 @@ void jouer(SDL_Surface *fond){
     for(i=0;i<4;i++){
         SDL_FreeSurface(Link[i]);
     }
+    SDL_DestroyRenderer(rendu);
+    SDL_DestroyWindow(window);
+    SDL_DestroyTexture(texture);
+    SDL_Quit();
 }
 
 void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction){
