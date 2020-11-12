@@ -312,11 +312,11 @@ void jouer(SDL_Surface *fond){
     carte[34][14] = 1;
     carte[34][15] = 1;
 
-    Link[BAS]=SDL_LoadBMP("src/linkB.bmp");
-    Link[HAUT]=SDL_LoadBMP("src/linkH.bmp");
-    Link[GAUCHE] = SDL_LoadBMP("src/linkG.bmp");
-    Link[DROITE] = SDL_LoadBMP("src/linkR.bmp");
-    LinkActuel=Link[BAS];
+    BAS[1]=SDL_LoadBMP("src/linkB.bmp");
+    HAUT[1]=SDL_LoadBMP("src/linkH.bmp");
+    GAUCHE[1] = SDL_LoadBMP("src/linkG.bmp");
+    DROITE[1] = SDL_LoadBMP("src/linkR.bmp");
+    LinkActuel=BAS[1];
     positionjoueur.x=6;
     positionjoueur.y=6;
     carte[6][6]=LINK;
@@ -345,20 +345,20 @@ void jouer(SDL_Surface *fond){
         while (SDL_PollEvent(&event))
         {
             if (keys[SDL_SCANCODE_UP]){
-                LinkActuel = Link[HAUT];
-                deplacerjoueur(carte, &positionjoueur, HAUT);
+                LinkActuel = HAUT[1];
+                deplacerjoueur(carte, &positionjoueur, haut);
             }
             else if (keys[SDL_SCANCODE_DOWN]){
-                LinkActuel = Link[BAS];
-                deplacerjoueur(carte, &positionjoueur, BAS);
+                LinkActuel = BAS[1];
+                deplacerjoueur(carte, &positionjoueur, bas);
             }
             else if (keys[SDL_SCANCODE_RIGHT]){
-                LinkActuel = Link[DROITE];
-                deplacerjoueur(carte, &positionjoueur, DROITE);
+                LinkActuel = DROITE[1];
+                deplacerjoueur(carte, &positionjoueur, droite);
             }
             else if (keys[SDL_SCANCODE_LEFT]){
-                LinkActuel = Link[GAUCHE];
-                deplacerjoueur(carte, &positionjoueur, GAUCHE);
+                LinkActuel = GAUCHE[1];
+                deplacerjoueur(carte, &positionjoueur, gauche);
             }
             switch (event.type){
             case SDL_QUIT:
@@ -415,22 +415,22 @@ void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjou
 void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction){
     switch (direction)
     {
-    case HAUT:
+    case haut:
         if(carte[pos->y-1][pos->x]==MUR)
             break;
         pos->y--;
         break;
-    case BAS:
+    case bas:
         if (carte[pos->y + 1][pos->x] == MUR)
             break;
         pos->y++;
         break;
-    case GAUCHE:
+    case gauche:
         if (carte[pos->y][pos->x-1] == MUR)
             break;
         pos->x--;
         break;
-    case DROITE:
+    case droite:
         if (carte[pos->y][pos->x+1] == MUR)
             break;
         pos->x++;

@@ -13,10 +13,10 @@ int carte[35][45];
 
 enum
 {
-    HAUT,
-    BAS,
-    GAUCHE,
-    DROITE
+    haut,
+    bas,
+    gauche,
+    droite
 };
 enum
 {
