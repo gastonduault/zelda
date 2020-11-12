@@ -9,6 +9,7 @@ SDL_Window *window;
 SDL_Rect positionfond;
 SDL_Rect position, positionjoueur;
 SDL_Texture *textL;
+int carte[35][45];
 
 enum
 {
@@ -23,6 +24,7 @@ enum
     MUR,
     LINK
 };
+
 
 void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjoueur);
 void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction);

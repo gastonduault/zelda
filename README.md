@@ -1,13 +1,6 @@
 <h1>Zelda</h1> 
-Encore en cour de création :
-<ul>
-   <li>
-       animation de link avec l'épée 
-     </li>
-    <li>
-        déplacement fluide (faire les plusieurs <em>frame</em> de déplacement).
-    </li>
-</ul>
+Encore en cour de création 
+
 Petit jeu en C avec la bibliothèque SDL 2.0
 
 <h2>Jouer au jeu</h2>
