@@ -5,8 +5,6 @@
 #include "jouer.h"
 #include "constante.h"
 
-SDL_Rect position, positionjoueur;
-
 void jouer(SDL_Surface *fond){
     SDL_Surface *Link[4]={NULL};
     SDL_Surface *LinkActuel=NULL;
@@ -588,28 +586,7 @@ void jouer(SDL_Surface *fond){
             break;
             }
         }
-
-        SDL_Texture *textL;
-        SDL_RenderClear(rendu);
-        if (SDL_RenderCopy(rendu, texture, NULL, &positionfond) != 0)
-        {
-            printf("impossible d'afficher la texture");
-            SDL_QUIT;
-        }
-        textL = SDL_CreateTextureFromSurface(rendu, LinkActuel);
-        if (SDL_QueryTexture(textL, NULL, NULL, &position.w, &position.h) != 0)
-        {
-            printf("impossible charger le conteneur de link");
-            SDL_QUIT;
-        }
-        position.x = positionjoueur.x * TAILLE_BLOC;
-        position.y = positionjoueur.y * TAILLE_BLOC;
-        if (SDL_RenderCopy(rendu, textL, NULL, &position) != 0)
-        {
-            printf("impossible d'afficher la texture de link");
-            SDL_QUIT;
-        }
-        SDL_RenderPresent(rendu);
+        afficher(rendu, LinkActuel, positionjoueur);
     }
     for(i=0;i<4;i++){
         SDL_FreeSurface(Link[i]);
@@ -618,6 +595,29 @@ void jouer(SDL_Surface *fond){
     SDL_DestroyWindow(window);
     SDL_DestroyTexture(texture);
     SDL_Quit();
+}
+
+void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjoueur)
+{
+    SDL_RenderClear(rendu);
+    if (SDL_RenderCopy(rendu, texture, NULL, &positionfond) != 0)
+    {
+        printf("impossible d'afficher la texture");
+        SDL_QUIT;
+    }
+    textL = SDL_CreateTextureFromSurface(rendu, LinkActuel);
+    if (SDL_QueryTexture(textL, NULL, NULL, &position.w, &position.h) != 0){
+        printf("impossible charger le conteneur de link");
+        SDL_QUIT;
+    }
+    position.x = positionjoueur.x * TAILLE_BLOC;
+    position.y = positionjoueur.y * TAILLE_BLOC;
+    if (SDL_RenderCopy(rendu, textL, NULL, &position) != 0)
+    {
+        printf("impossible d'afficher la texture de link");
+        SDL_QUIT;
+    }
+    SDL_RenderPresent(rendu);
 }
 
 void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction){

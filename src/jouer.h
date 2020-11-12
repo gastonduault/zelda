@@ -1,3 +1,5 @@
+#include "constante.h"
+
 #define WINDOW_WITDH 800
 #define WINDOW_HEIGHT 600
 
@@ -5,8 +7,24 @@ SDL_Texture *texture;
 SDL_Renderer *rendu;
 SDL_Window *window;
 SDL_Rect positionfond;
+SDL_Rect position, positionjoueur;
+SDL_Texture *textL;
 
+enum
+{
+    HAUT,
+    BAS,
+    GAUCHE,
+    DROITE
+};
+enum
+{
+    VIDE,
+    MUR,
+    LINK
+};
 
+void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjoueur);
 void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction);
 
 void jouer(SDL_Surface *fond);

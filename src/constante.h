@@ -1,3 +1,2 @@
 #define TAILLE_BLOC 17
-enum{HAUT,BAS,GAUCHE,DROITE};
-enum{VIDE,MUR,LINK};
+
