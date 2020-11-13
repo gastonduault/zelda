@@ -6,10 +6,9 @@
 #include "constante.h"
 
 void jouer(SDL_Surface *fond){
-    SDL_Surface *Link[4]={NULL};
-    SDL_Surface *LinkActuel=NULL;
     int continuer = 1;
     int i = 0, j = 0;
+    int carte[35][45];
     for (i = 0; i < 34; i++)
     {
         for (j = 0; j < 45; j++)
@@ -312,23 +311,35 @@ void jouer(SDL_Surface *fond){
     carte[34][14] = 1;
     carte[34][15] = 1;
 
+    SDL_Surface *Link[4] = {NULL};
+    SDL_Surface *LinkActuel = NULL;
+    bool keys[322] = {false};
+    bool stop = false;
+    int temp_actuel = 0;
+    int temp_precedent = 0;
     BAS[1]=SDL_LoadBMP("src/linkB.bmp");
     HAUT[1]=SDL_LoadBMP("src/linkH.bmp");
+
     GAUCHE[1] = SDL_LoadBMP("src/linkG.bmp");
-    DROITE[1] = SDL_LoadBMP("src/linkR.bmp");
+    GAUCHE[2] = SDL_LoadBMP("src/linkG1.bmp");
+    GAUCHE[3] = SDL_LoadBMP("src/linkG2.bmp");
+
+    DROITE[3] = SDL_LoadBMP("src/linkR.bmp");
+    DROITE[2] = SDL_LoadBMP("src/linkR1.bmp");
+    DROITE[1] = SDL_LoadBMP("src/linkR2.bmp");
+
     LinkActuel=BAS[1];
     positionjoueur.x=6;
     positionjoueur.y=6;
     carte[6][6]=LINK;
-    bool keys[322] = {false};
+    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
 
     fond = SDL_LoadBMP("src/zeldamap.bmp");
     window=SDL_CreateWindow("ZELDA !", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WITDH, WINDOW_HEIGHT, 0);
     rendu=SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     texture = SDL_CreateTextureFromSurface(rendu, fond);
     SDL_FreeSurface(fond);
-    if (SDL_QueryTexture(texture, NULL, NULL, &positionfond.w, &positionfond.h) != 0)
-    {
+    if (SDL_QueryTexture(texture, NULL, NULL, &positionfond.w, &positionfond.h) != 0){
         printf("impossible charger le conteneur du fond");
         SDL_QUIT;
     }
@@ -342,24 +353,7 @@ void jouer(SDL_Surface *fond){
 
     SDL_Event event;
     while (continuer!=0){
-        while (SDL_PollEvent(&event))
-        {
-            if (keys[SDL_SCANCODE_UP]){
-                LinkActuel = HAUT[1];
-                deplacerjoueur(carte, &positionjoueur, haut);
-            }
-            else if (keys[SDL_SCANCODE_DOWN]){
-                LinkActuel = BAS[1];
-                deplacerjoueur(carte, &positionjoueur, bas);
-            }
-            else if (keys[SDL_SCANCODE_RIGHT]){
-                LinkActuel = DROITE[1];
-                deplacerjoueur(carte, &positionjoueur, droite);
-            }
-            else if (keys[SDL_SCANCODE_LEFT]){
-                LinkActuel = GAUCHE[1];
-                deplacerjoueur(carte, &positionjoueur, gauche);
-            }
+        while (SDL_PollEvent(&event)){
             switch (event.type){
             case SDL_QUIT:
                 continuer = 0;
@@ -369,6 +363,41 @@ void jouer(SDL_Surface *fond){
                 break;
             case SDL_KEYDOWN:
                 keys[event.key.keysym.scancode] = true;
+                if (keys[SDL_SCANCODE_UP])
+                {
+                    LinkActuel = HAUT[1];
+                    deplacerjoueur(carte, &positionjoueur, haut);
+                }
+                else if (keys[SDL_SCANCODE_DOWN])
+                {
+                    LinkActuel = BAS[1];
+                    deplacerjoueur(carte, &positionjoueur, bas);
+                }
+                else if (keys[SDL_SCANCODE_RIGHT]){
+                    i=0;
+                    stop=false;
+                    while (!stop){   
+                        i++;
+                        LinkActuel = DROITE[i];
+                        afficher(rendu, LinkActuel, positionjoueur);
+                        SDL_Delay(50);
+                        deplacerjoueur(carte, &positionjoueur, droite);
+                        SDL_PumpEvents();
+                        if (i >= 3)
+                            i = 0;
+                        if (!keystates[SDL_SCANCODE_RIGHT])
+                        {
+                            stop=true;
+                        }
+                    }
+                    LinkActuel = DROITE[3];
+                    afficher(rendu, LinkActuel, positionjoueur);
+                }
+                else if (keys[SDL_SCANCODE_LEFT])
+                {
+                    LinkActuel = GAUCHE[1];
+                    deplacerjoueur(carte, &positionjoueur, gauche);
+                }
                 switch (event.key.keysym.sym)
                 {
                 case SDLK_ESCAPE:

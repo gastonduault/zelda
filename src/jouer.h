@@ -9,7 +9,6 @@ SDL_Window *window;
 SDL_Rect positionfond;
 SDL_Rect position, positionjoueur;
 SDL_Texture *textL;
-int carte[35][45];
 
 enum
 {
