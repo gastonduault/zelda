@@ -317,8 +317,14 @@ void jouer(SDL_Surface *fond){
     bool stop = false;
     int temp_actuel = 0;
     int temp_precedent = 0;
-    BAS[1]=SDL_LoadBMP("src/linkB.bmp");
-    HAUT[1]=SDL_LoadBMP("src/linkH.bmp");
+
+    BAS[3]=SDL_LoadBMP("src/linkB.bmp");
+    BAS[2] = SDL_LoadBMP("src/linkB1.bmp");
+    BAS[1] = SDL_LoadBMP("src/linkB2.bmp");
+
+    HAUT[3]=SDL_LoadBMP("src/linkH.bmp");
+    HAUT[2] = SDL_LoadBMP("src/linkH1.bmp");
+    HAUT[1] = SDL_LoadBMP("src/linkH2.bmp");
 
     GAUCHE[3] = SDL_LoadBMP("src/linkG.bmp");
     GAUCHE[2] = SDL_LoadBMP("src/linkG1.bmp");
@@ -365,13 +371,37 @@ void jouer(SDL_Surface *fond){
                 keys[event.key.keysym.scancode] = true;
                 if (keys[SDL_SCANCODE_UP])
                 {
-                    LinkActuel = HAUT[1];
-                    deplacerjoueur(carte, &positionjoueur, haut);
+                    i = 0;
+                    while (keystates[SDL_SCANCODE_UP])
+                    {
+                        i++;
+                        LinkActuel = HAUT[i];
+                        afficher(rendu, LinkActuel, positionjoueur);
+                        SDL_Delay(60);
+                        deplacerjoueur(carte, &positionjoueur, haut);
+                        SDL_PumpEvents();
+                        if (i >= 3)
+                            i = 0;
+                    }
+                    LinkActuel = HAUT[3];
+                    afficher(rendu, LinkActuel, positionjoueur);
                 }
                 else if (keys[SDL_SCANCODE_DOWN])
                 {
-                    LinkActuel = BAS[1];
-                    deplacerjoueur(carte, &positionjoueur, bas);
+                    i = 0;
+                    while (keystates[SDL_SCANCODE_DOWN])
+                    {
+                        i++;
+                        LinkActuel = BAS[i];
+                        afficher(rendu, LinkActuel, positionjoueur);
+                        SDL_Delay(60);
+                        deplacerjoueur(carte, &positionjoueur, bas);
+                        SDL_PumpEvents();
+                        if (i >= 3)
+                            i = 0;
+                    }
+                    LinkActuel = BAS[3];
+                    afficher(rendu, LinkActuel, positionjoueur);
                 }
                 else if (keys[SDL_SCANCODE_RIGHT]){
                     i=0;
