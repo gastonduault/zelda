@@ -320,9 +320,9 @@ void jouer(SDL_Surface *fond){
     BAS[1]=SDL_LoadBMP("src/linkB.bmp");
     HAUT[1]=SDL_LoadBMP("src/linkH.bmp");
 
-    GAUCHE[1] = SDL_LoadBMP("src/linkG.bmp");
+    GAUCHE[3] = SDL_LoadBMP("src/linkG.bmp");
     GAUCHE[2] = SDL_LoadBMP("src/linkG1.bmp");
-    GAUCHE[3] = SDL_LoadBMP("src/linkG2.bmp");
+    GAUCHE[1] = SDL_LoadBMP("src/linkG2.bmp");
 
     DROITE[3] = SDL_LoadBMP("src/linkR.bmp");
     DROITE[2] = SDL_LoadBMP("src/linkR1.bmp");
@@ -375,8 +375,7 @@ void jouer(SDL_Surface *fond){
                 }
                 else if (keys[SDL_SCANCODE_RIGHT]){
                     i=0;
-                    stop=false;
-                    while (!stop){   
+                    while (keystates[SDL_SCANCODE_RIGHT]){
                         i++;
                         LinkActuel = DROITE[i];
                         afficher(rendu, LinkActuel, positionjoueur);
@@ -385,21 +384,27 @@ void jouer(SDL_Surface *fond){
                         SDL_PumpEvents();
                         if (i >= 3)
                             i = 0;
-                        if (!keystates[SDL_SCANCODE_RIGHT])
-                        {
-                            stop=true;
-                        }
                     }
                     LinkActuel = DROITE[3];
                     afficher(rendu, LinkActuel, positionjoueur);
                 }
-                else if (keys[SDL_SCANCODE_LEFT])
-                {
-                    LinkActuel = GAUCHE[1];
-                    deplacerjoueur(carte, &positionjoueur, gauche);
+                else if (keys[SDL_SCANCODE_LEFT]){
+                    i = 0;
+                    while (keystates[SDL_SCANCODE_LEFT])
+                    {
+                        i++;
+                        LinkActuel = GAUCHE[i];
+                        afficher(rendu, LinkActuel, positionjoueur);
+                        SDL_Delay(50);
+                        deplacerjoueur(carte, &positionjoueur, gauche);
+                        SDL_PumpEvents();
+                        if (i >= 3)
+                            i = 0;
+                    }
+                    LinkActuel = GAUCHE[3];
+                    afficher(rendu, LinkActuel, positionjoueur);
                 }
-                switch (event.key.keysym.sym)
-                {
+                switch (event.key.keysym.sym){
                 case SDLK_ESCAPE:
                     continuer = 0;
                     break;
