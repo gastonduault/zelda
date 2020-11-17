@@ -201,6 +201,7 @@ void jouer(SDL_Surface *fond){
     carte[19][28] = 1;
     carte[19][27] = 1;
     carte[20][4] = 1;
+    carte[20][7] = 1;
     carte[20][10] = 1;
     carte[20][13] = 1;
     carte[20][19] = 1;
@@ -356,94 +357,128 @@ void jouer(SDL_Surface *fond){
         printf("impossible d'afficher la texture");
         SDL_QUIT;
     }
+    SDL_Surface *mur = NULL;
+    mur = SDL_LoadBMP("src/mur.bmp");
 
     SDL_Event event;
     while (continuer!=0){
-        while (SDL_PollEvent(&event)){
-            switch (event.type){
-            case SDL_QUIT:
-                continuer = 0;
-                break;
-            case SDL_KEYUP:
-                keys[event.key.keysym.scancode] = false;
-                break;
-            case SDL_KEYDOWN:
-                keys[event.key.keysym.scancode] = true;
-                if (keys[SDL_SCANCODE_UP])
+        SDL_Texture *textM;
+        for (i = 0; i < 35; i++)
+        {
+            for (j = 0; j < 50; j++)
+            {
+                position.x = j * TAILLE_BLOC;
+                position.y = i * TAILLE_BLOC;
+                switch (carte[i][j])
                 {
-                    i = 0;
-                    while (keystates[SDL_SCANCODE_UP])
+                case MUR:
+                    textM = SDL_CreateTextureFromSurface(rendu, mur);
+                    if (SDL_QueryTexture(textM, NULL, NULL, &position.w, &position.h) != 0)
                     {
-                        i++;
-                        LinkActuel = HAUT[i];
-                        afficher(rendu, LinkActuel, positionjoueur);
-                        SDL_Delay(60);
-                        deplacerjoueur(carte, &positionjoueur, haut);
-                        SDL_PumpEvents();
-                        if (i >= 3)
-                            i = 0;
+                        printf("impossible charger le conteneur de mur");
+                        SDL_QUIT;
                     }
-                    LinkActuel = HAUT[3];
-                    afficher(rendu, LinkActuel, positionjoueur);
-                }
-                else if (keys[SDL_SCANCODE_DOWN])
-                {
-                    i = 0;
-                    while (keystates[SDL_SCANCODE_DOWN])
+                    if (SDL_RenderCopy(rendu, textM, NULL, &position) != 0)
                     {
-                        i++;
-                        LinkActuel = BAS[i];
-                        afficher(rendu, LinkActuel, positionjoueur);
-                        SDL_Delay(60);
-                        deplacerjoueur(carte, &positionjoueur, bas);
-                        SDL_PumpEvents();
-                        if (i >= 3)
-                            i = 0;
+                        printf("impossible d'afficher la texture de mur");
+                        SDL_QUIT;
                     }
-                    LinkActuel = BAS[3];
-                    afficher(rendu, LinkActuel, positionjoueur);
-                }
-                else if (keys[SDL_SCANCODE_RIGHT]){
-                    i=0;
-                    while (keystates[SDL_SCANCODE_RIGHT]){
-                        i++;
-                        LinkActuel = DROITE[i];
-                        afficher(rendu, LinkActuel, positionjoueur);
-                        SDL_Delay(50);
-                        deplacerjoueur(carte, &positionjoueur, droite);
-                        SDL_PumpEvents();
-                        if (i >= 3)
-                            i = 0;
-                    }
-                    LinkActuel = DROITE[3];
-                    afficher(rendu, LinkActuel, positionjoueur);
-                }
-                else if (keys[SDL_SCANCODE_LEFT]){
-                    i = 0;
-                    while (keystates[SDL_SCANCODE_LEFT])
-                    {
-                        i++;
-                        LinkActuel = GAUCHE[i];
-                        afficher(rendu, LinkActuel, positionjoueur);
-                        SDL_Delay(50);
-                        deplacerjoueur(carte, &positionjoueur, gauche);
-                        SDL_PumpEvents();
-                        if (i >= 3)
-                            i = 0;
-                    }
-                    LinkActuel = GAUCHE[3];
-                    afficher(rendu, LinkActuel, positionjoueur);
-                }
-                switch (event.key.keysym.sym){
-                case SDLK_ESCAPE:
-                    continuer = 0;
+                    SDL_RenderPresent(rendu);
                     break;
                 }
-            break;
             }
         }
-        afficher(rendu, LinkActuel, positionjoueur);
-    }
+            while (SDL_PollEvent(&event))
+            {
+                switch (event.type)
+                {
+                case SDL_QUIT:
+                    continuer = 0;
+                    break;
+                case SDL_KEYUP:
+                    keys[event.key.keysym.scancode] = false;
+                    break;
+                case SDL_KEYDOWN:
+                    keys[event.key.keysym.scancode] = true;
+                    if (keys[SDL_SCANCODE_UP])
+                    {
+                        i = 0;
+                        while (keystates[SDL_SCANCODE_UP])
+                        {
+                            i++;
+                            LinkActuel = HAUT[i];
+                            afficher(rendu, LinkActuel, positionjoueur);
+                            SDL_Delay(70);
+                            deplacerjoueur(carte, &positionjoueur, haut);
+                            SDL_PumpEvents();
+                            if (i >= 3)
+                                i = 0;
+                        }
+                        LinkActuel = HAUT[3];
+                        afficher(rendu, LinkActuel, positionjoueur);
+                    }
+                    else if (keys[SDL_SCANCODE_DOWN])
+                    {
+                        i = 0;
+                        while (keystates[SDL_SCANCODE_DOWN])
+                        {
+                            i++;
+                            LinkActuel = BAS[i];
+                            afficher(rendu, LinkActuel, positionjoueur);
+                            SDL_Delay(70);
+                            deplacerjoueur(carte, &positionjoueur, bas);
+                            SDL_PumpEvents();
+                            if (i >= 3)
+                                i = 0;
+                        }
+                        LinkActuel = BAS[3];
+                        afficher(rendu, LinkActuel, positionjoueur);
+                    }
+                    else if (keys[SDL_SCANCODE_RIGHT])
+                    {
+                        i = 0;
+                        while (keystates[SDL_SCANCODE_RIGHT])
+                        {
+                            i++;
+                            LinkActuel = DROITE[i];
+                            afficher(rendu, LinkActuel, positionjoueur);
+                            SDL_Delay(70);
+                            deplacerjoueur(carte, &positionjoueur, droite);
+                            SDL_PumpEvents();
+                            if (i >= 3)
+                                i = 0;
+                        }
+                        LinkActuel = DROITE[3];
+                        afficher(rendu, LinkActuel, positionjoueur);
+                    }
+                    else if (keys[SDL_SCANCODE_LEFT])
+                    {
+                        i = 0;
+                        while (keystates[SDL_SCANCODE_LEFT])
+                        {
+                            i++;
+                            LinkActuel = GAUCHE[i];
+                            afficher(rendu, LinkActuel, positionjoueur);
+                            SDL_Delay(70);
+                            deplacerjoueur(carte, &positionjoueur, gauche);
+                            SDL_PumpEvents();
+                            if (i >= 3)
+                                i = 0;
+                        }
+                        LinkActuel = GAUCHE[3];
+                        afficher(rendu, LinkActuel, positionjoueur);
+                    }
+                    switch (event.key.keysym.sym)
+                    {
+                    case SDLK_ESCAPE:
+                        continuer = 0;
+                        break;
+                    }
+                    break;
+                }
+            }
+            afficher(rendu, LinkActuel, positionjoueur);
+        }
     for(i=0;i<4;i++){
         SDL_FreeSurface(Link[i]);
     }
