@@ -37,10 +37,4 @@ Petit jeu en C avec la bibliothèque SDL 2.0
 <hr />
 
 <br />
-| <img src="src/linkB.bmp"> | <img src="src/linkG.bmp"> | <img src="src/linkR.bmp"> | <img src="src/linkH.bmp"> |
-| -------- | -------- | ------------- | ------- |
-|<img src="src/linkB1.bmp">| <img src="src/linkG1.bmp"> | <img src="src/linkR1.bmp"> |
-| <img src="src/linkB2.bmp">| <img src="src/linkG2.bmp"> | <img src="src/linkR2.bmp"> | Confinement |
-| Expérience travail d'équipe/projet | Premier projet Java |   | Connexion Internet |
-| Base en gestion de projet |  |  |   |
-| Outils de réunion (Discord) |  |  |  |
+
