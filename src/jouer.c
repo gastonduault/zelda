@@ -323,29 +323,30 @@ void jouer(SDL_Surface *fond){
     int temp_actuel = 0;
     int temp_precedent = 0;
 
-    BAS[3]=SDL_LoadBMP("src/linkB.bmp");
-    BAS[2] = SDL_LoadBMP("src/linkB1.bmp");
-    BAS[1] = SDL_LoadBMP("src/linkB2.bmp");
+    BAS[3]=SDL_LoadBMP("src/img/linkB.bmp");
+    BAS[2] = SDL_LoadBMP("src/img/linkB1.bmp");
+    BAS[1] = SDL_LoadBMP("src/img/linkB2.bmp");
 
-    HAUT[3]=SDL_LoadBMP("src/linkH.bmp");
-    HAUT[2] = SDL_LoadBMP("src/linkH1.bmp");
-    HAUT[1] = SDL_LoadBMP("src/linkH2.bmp");
+    HAUT[3]=SDL_LoadBMP("src/img/linkH.bmp");
+    HAUT[2] = SDL_LoadBMP("src/img/linkH1.bmp");
+    HAUT[1] = SDL_LoadBMP("src/img/linkH2.bmp");
 
-    GAUCHE[3] = SDL_LoadBMP("src/linkG.bmp");
-    GAUCHE[2] = SDL_LoadBMP("src/linkG1.bmp");
-    GAUCHE[1] = SDL_LoadBMP("src/linkG2.bmp");
+    GAUCHE[3] = SDL_LoadBMP("src/img/linkG.bmp");
+    GAUCHE[2] = SDL_LoadBMP("src/img/linkG1.bmp");
+    GAUCHE[1] = SDL_LoadBMP("src/img/linkG2.bmp");
 
-    DROITE[3] = SDL_LoadBMP("src/linkR.bmp");
-    DROITE[2] = SDL_LoadBMP("src/linkR1.bmp");
-    DROITE[1] = SDL_LoadBMP("src/linkR2.bmp");
+    DROITE[3] = SDL_LoadBMP("src/img/linkR.bmp");
+    DROITE[2] = SDL_LoadBMP("src/img/linkR1.bmp");
+    DROITE[1] = SDL_LoadBMP("src/img/linkR2.bmp");
 
     LinkActuel=BAS[1];
     positionjoueur.x=6;
     positionjoueur.y=6;
     carte[6][6]=LINK;
+    
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
 
-    fond = SDL_LoadBMP("src/zeldamap.bmp");
+    fond = SDL_LoadBMP("src/img/zeldamap.bmp");
     window=SDL_CreateWindow("ZELDA !", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WITDH, WINDOW_HEIGHT, 0);
     rendu=SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     texture = SDL_CreateTextureFromSurface(rendu, fond);

@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "main.h"
 #include "jouer.h"
+#include "mainson.h"
 /*  gcc src/*.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
     bin\prog.exe
 */
@@ -21,7 +22,7 @@ int main(int argc, char **argv){
     
 /*---------------------------------------------*/
 
-    menu = SDL_LoadBMP("src/acceuil.bmp");
+    menu = SDL_LoadBMP("src/img/acceuil.bmp");
     if (menu == NULL)
         ExitChargement("impossiblde de charger le fond", renderer, window);
 
