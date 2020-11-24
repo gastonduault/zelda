@@ -339,6 +339,8 @@ void jouer(SDL_Surface *fond){
     DROITE[2] = SDL_LoadBMP("src/img/linkR1.bmp");
     DROITE[1] = SDL_LoadBMP("src/img/linkR2.bmp");
 
+    EPE[1]=SDL_LoadBMP("src/img/epeeB.bmp");
+
     LinkActuel=BAS[1];
     positionjoueur.x=6;
     positionjoueur.y=6;
@@ -357,8 +359,7 @@ void jouer(SDL_Surface *fond){
     }
     positionfond.x = (791 - positionfond.w) / 2;
     positionfond.x = (575 - positionfond.h) / 2;
-    if (SDL_RenderCopy(rendu, texture, NULL, &positionfond) != 0)
-    {
+    if (SDL_RenderCopy(rendu, texture, NULL, &positionfond) != 0){
         printf("impossible d'afficher la texture");
         SDL_QUIT;
     }
@@ -445,6 +446,9 @@ void jouer(SDL_Surface *fond){
                         LinkActuel = GAUCHE[3];
                         afficher(rendu, LinkActuel, positionjoueur);
                     }
+                    else if(keys[SDL_SCANCODE_SPACE]){
+                        epee(LinkActuel,positionjoueur,rendu, carte);
+                    }
                     switch (event.key.keysym.sym)
                     {
                     case SDLK_ESCAPE:
@@ -464,7 +468,6 @@ void jouer(SDL_Surface *fond){
     SDL_DestroyTexture(texture);
     SDL_Quit();
 }
-
 void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjoueur)
 {
     SDL_RenderClear(rendu);
@@ -510,6 +513,29 @@ void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction){
         if (carte[pos->y][pos->x+1] == MUR)
             break;
         pos->x++;
+        break;
+    }
+}
+
+void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45])
+{
+    int etat;
+    SDL_Surface *LinkEpee;
+    if ((LinkActuel == BAS[1]) || (LinkActuel == BAS[2]) || (LinkActuel == BAS[3]))
+    {
+        etat=1;
+    }
+
+    switch (etat)
+    {
+    case 1:
+        LinkEpee = EPE[1];
+        deplacerjoueur(carte,&positionjoueur, bas);
+        afficher(rendu, LinkEpee, positionjoueur);
+        SDL_Delay(100);
+        break;
+    
+    default:
         break;
     }
 }
