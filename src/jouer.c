@@ -526,16 +526,15 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
         etat=1;
     }
 
-    switch (etat)
-    {
-    case 1:
-        LinkEpee = EPE[1];
-        deplacerjoueur(carte,&positionjoueur, bas);
-        afficher(rendu, LinkEpee, positionjoueur);
-        SDL_Delay(100);
-        break;
-    
-    default:
-        break;
+    switch (etat){
+        case 1:
+            LinkEpee = EPE[1];
+            deplacerjoueur(carte,&positionjoueur, bas);
+            afficher(rendu, LinkEpee, positionjoueur);
+            SDL_Delay(100);
+            break;
+        
+        default:
+            break;
     }
 }
