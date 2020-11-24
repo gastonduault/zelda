@@ -5,6 +5,7 @@
 #include "jouer.h"
 #include "constante.h"
 
+
 void jouer(SDL_Surface *fond){
     int continuer = 1;
     int i = 0, j = 0;
@@ -322,6 +323,7 @@ void jouer(SDL_Surface *fond){
     bool stop = false;
     int temp_actuel = 0;
     int temp_precedent = 0;
+    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
 
     BAS[3]=SDL_LoadBMP("src/img/linkB.bmp");
     BAS[2] = SDL_LoadBMP("src/img/linkB1.bmp");
@@ -339,14 +341,15 @@ void jouer(SDL_Surface *fond){
     DROITE[2] = SDL_LoadBMP("src/img/linkR1.bmp");
     DROITE[1] = SDL_LoadBMP("src/img/linkR2.bmp");
 
-    EPE[1]=SDL_LoadBMP("src/img/epeeB.bmp");
+    EPEB[3] = SDL_LoadBMP("src/img/epeeB2.bmp");
+    EPEB[2] = SDL_LoadBMP("src/img/epeeB3.bmp");
+    EPEB[1] = SDL_LoadBMP("src/img/epeeB1.bmp");
 
     LinkActuel=BAS[1];
     positionjoueur.x=6;
     positionjoueur.y=6;
     carte[6][6]=LINK;
     
-    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
 
     fond = SDL_LoadBMP("src/img/zeldamap.bmp");
     window=SDL_CreateWindow("ZELDA !", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WITDH, WINDOW_HEIGHT, 0);
@@ -446,16 +449,15 @@ void jouer(SDL_Surface *fond){
                         LinkActuel = GAUCHE[3];
                         afficher(rendu, LinkActuel, positionjoueur);
                     }
-                    else if(keys[SDL_SCANCODE_SPACE]){
-                        epee(LinkActuel,positionjoueur,rendu, carte);
-                    }
                     switch (event.key.keysym.sym)
                     {
                     case SDLK_ESCAPE:
                         continuer = 0;
                         break;
                     }
-                    break;
+                    case SDLK_SPACE:
+                        epee(LinkActuel, positionjoueur, rendu, carte);
+                        break;
                 }
             }
             afficher(rendu, LinkActuel, positionjoueur);
@@ -519,7 +521,8 @@ void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction){
 
 void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45])
 {
-    int etat;
+    int etat, i;
+    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
     SDL_Surface *LinkEpee;
     if ((LinkActuel == BAS[1]) || (LinkActuel == BAS[2]) || (LinkActuel == BAS[3]))
     {
@@ -528,10 +531,26 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
 
     switch (etat){
         case 1:
-            LinkEpee = EPE[1];
-            deplacerjoueur(carte,&positionjoueur, bas);
-            afficher(rendu, LinkEpee, positionjoueur);
-            SDL_Delay(100);
+            while (keystates[SDL_SCANCODE_SPACE])
+            {
+                i = etat;
+                LinkEpee = EPEB[i];
+                afficher(rendu, LinkEpee, positionjoueur);
+                deplacerjoueur(carte, &positionjoueur, bas);
+                SDL_Delay(70);
+                i=2;
+                LinkEpee = EPEB[i];
+                afficher(rendu, LinkEpee, positionjoueur);
+                SDL_Delay(70);
+                SDL_PumpEvents();
+                while (keystates[SDL_SCANCODE_SPACE]){
+                    i = 3;
+                    LinkEpee = EPEB[i];
+                    afficher(rendu, LinkEpee, positionjoueur);
+                    SDL_PumpEvents();
+                }
+            }
+            SDL_PumpEvents();
             break;
         
         default:
