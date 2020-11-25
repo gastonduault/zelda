@@ -7,3 +7,4 @@ SDL_Surface *HAUT[4];
 SDL_Surface *BAS[4];
 SDL_Surface *EPEB[4];
 SDL_Surface *EPEH[4];
+SDL_Surface *EPEG[4];

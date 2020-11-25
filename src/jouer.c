@@ -348,6 +348,10 @@ void jouer(SDL_Surface *fond){
     EPEH[1]=SDL_LoadBMP("src/img/epeeH1.bmp");
     EPEH[2] = SDL_LoadBMP("src/img/epeeH2.bmp");
 
+    EPEG[1] = SDL_LoadBMP("src/img/epeeG1.bmp");
+    EPEG[2] = SDL_LoadBMP("src/img/epeeG2.bmp");
+    EPEG[3] = SDL_LoadBMP("src/img/epeeG3.bmp");
+
     LinkActuel=BAS[1];
     positionjoueur.x=6;
     positionjoueur.y=6;
@@ -534,6 +538,9 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
     else if ((LinkActuel == HAUT[1]) || (LinkActuel == HAUT[2]) || (LinkActuel == HAUT[3])){
         etat=2;
     }
+    else if ((LinkActuel == GAUCHE[1]) || (LinkActuel == GAUCHE[2]) || (LinkActuel == GAUCHE[3])){
+        etat=3;
+    }
 
         switch (etat)
         {
@@ -583,6 +590,35 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
                     }
                     i = 1;
                     LinkEpee = EPEH[i];
+                    afficher(rendu, LinkEpee, positionjoueur);
+                    SDL_Delay(100);
+                }
+                break;
+            case 3:
+                while (keystates[SDL_SCANCODE_SPACE])
+                {
+                    i = 1;
+                    LinkEpee = EPEG[i];
+                    afficher(rendu, LinkEpee, positionjoueur);
+                    deplacerjoueur(carte, &positionjoueur, gauche);
+                    SDL_Delay(70);
+                    i = 2;
+                    LinkEpee = EPEG[i];
+                    afficher(rendu, LinkEpee, positionjoueur);
+                    SDL_Delay(70);
+                    while (keystates[SDL_SCANCODE_SPACE])
+                    {
+                        i = 3;
+                        LinkEpee = EPEG[i];
+                        afficher(rendu, LinkEpee, positionjoueur);
+                        SDL_PumpEvents();
+                    }
+                    i = 2;
+                    LinkEpee = EPEG[i];
+                    afficher(rendu, LinkEpee, positionjoueur);
+                    SDL_Delay(70);
+                    i = 1;
+                    LinkEpee = EPEG[i];
                     afficher(rendu, LinkEpee, positionjoueur);
                     SDL_Delay(100);
                 }
