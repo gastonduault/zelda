@@ -5,7 +5,7 @@ Petit jeu en C avec la bibliothèque SDL 2.0
 <ul><li>encore en cour de création</li>
     <ul>
         <li>rentrer dans la maison</li>
-        <li>aller plus loin dans la map est encore en cour de création</li>
+        <li>aller plus loin dans la map</li>
         <li>Célébration de Link</li>
     </ul>
 </ul>
