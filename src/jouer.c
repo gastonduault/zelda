@@ -345,6 +345,9 @@ void jouer(SDL_Surface *fond){
     EPEB[2] = SDL_LoadBMP("src/img/epeeB3.bmp");
     EPEB[1] = SDL_LoadBMP("src/img/epeeB1.bmp");
 
+    EPEH[1]=SDL_LoadBMP("src/img/epeeH1.bmp");
+    EPEH[2] = SDL_LoadBMP("src/img/epeeH2.bmp");
+
     LinkActuel=BAS[1];
     positionjoueur.x=6;
     positionjoueur.y=6;
@@ -528,8 +531,12 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
     {
         etat=1;
     }
+    else if ((LinkActuel == HAUT[1]) || (LinkActuel == HAUT[2]) || (LinkActuel == HAUT[3])){
+        etat=2;
+    }
 
-    switch (etat){
+        switch (etat)
+        {
         case 1:
             while (keystates[SDL_SCANCODE_SPACE])
             {
@@ -549,7 +556,37 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
                     afficher(rendu, LinkEpee, positionjoueur);
                     SDL_PumpEvents();
                 }
+                i=2;
+                LinkEpee = EPEB[i];
+                afficher(rendu, LinkEpee, positionjoueur);
+                SDL_Delay(70);
+                i=1;
+                LinkEpee = EPEB[i];
+                afficher(rendu, LinkEpee, positionjoueur);
+                SDL_Delay(70);
             }
+            case 2:
+                while (keystates[SDL_SCANCODE_SPACE])
+                {
+                    i = etat;
+                    LinkEpee = EPEH[i];
+                    afficher(rendu, LinkEpee, positionjoueur);
+                    deplacerjoueur(carte, &positionjoueur, haut);
+                    SDL_Delay(70);
+                    SDL_PumpEvents();
+                    while (keystates[SDL_SCANCODE_SPACE])
+                    {
+                        i = 2;
+                        LinkEpee = EPEH[i];
+                        afficher(rendu, LinkEpee, positionjoueur);
+                        SDL_PumpEvents();
+                    }
+                    i = 1;
+                    LinkEpee = EPEH[i];
+                    afficher(rendu, LinkEpee, positionjoueur);
+                    SDL_Delay(100);
+                }
+                break;
             SDL_PumpEvents();
             break;
         
