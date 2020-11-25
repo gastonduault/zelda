@@ -8,7 +8,7 @@ Petit jeu en C avec la bibliothèque SDL 2.0
         <li>aller plus loin dans la map est encore en cour de création</li>
         <li>Célébration de Link</li>
     </ul>
-<ul>
+</ul>
 <h2>Jouer au jeu</h2>
 <p>il faut exécuter prog.exe a l'aide d'un Shell</p>
 <p>- <em>prog.exe</em> se situe dans le dossier bin >> bin\prog.exe</p>
