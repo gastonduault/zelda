@@ -4,7 +4,6 @@
 #include <stdbool.h>
 #include "main.h"
 #include "jouer.h"
-#include "mainson.h"
 #include "constante.h"
 /*  gcc src/*.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
     bin\prog.exe
@@ -17,8 +16,6 @@ int main(int argc, char **argv){
     if (SDL_CreateWindowAndRenderer(WINDOW_WITDH, WINDOW_HEIGHT, 0, &win, &ren) != 0)
         ExitWithError("impossible de creer la fenêtre et le rendu");
     unsigned int fram_limit = 0;
-    fram_limit = SDL_GetTicks() + 16; //delai pr limiter à 60fps
-    limit_fps(fram_limit);
     
 /*---------------------------------------------*/
 
@@ -44,6 +41,8 @@ int main(int argc, char **argv){
     int continuer = 3;
     while (continuer == 3)
     {
+        fram_limit = SDL_GetTicks() + 16; //delai pr limiter à 60fps
+        limit_fps(fram_limit);
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {

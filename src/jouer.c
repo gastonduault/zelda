@@ -378,11 +378,16 @@ void jouer(SDL_Surface *fond){
         SDL_QUIT;
     }
 
-    
+    unsigned int fram_limit = 0;
+
     SDL_Event event;
     while (continuer!=0){
+        fram_limit = SDL_GetTicks() + 16; //delai pr limiter à 60fps
+        limit_fps(fram_limit);
         while (SDL_PollEvent(&event))
         {
+            fram_limit = SDL_GetTicks() + 16; //delai pr limiter à 60fps
+            limit_fps(fram_limit);
             switch (event.type)
             {
             case SDL_QUIT:
