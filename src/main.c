@@ -5,6 +5,7 @@
 #include "main.h"
 #include "jouer.h"
 #include "mainson.h"
+#include "constante.h"
 /*  gcc src/*.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
     bin\prog.exe
 */
@@ -15,7 +16,6 @@ int main(int argc, char **argv){
     
     if (SDL_CreateWindowAndRenderer(WINDOW_WITDH, WINDOW_HEIGHT, 0, &window, &renderer) != 0)
         ExitWithError("impossible de creer la fenêtre et le rendu");
-
     unsigned int fram_limit = 0;
     fram_limit = SDL_GetTicks() + 16; //delai pr limiter à 60fps
     limit_fps(fram_limit);
@@ -60,6 +60,7 @@ int main(int argc, char **argv){
                         break;
                     case SDLK_1:
                         continuer=1;
+                        SDL_DestroyWindow(window);
                         jouer(fond);
                         break;
                     default:
