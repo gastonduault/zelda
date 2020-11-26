@@ -1,15 +1,11 @@
 #include "constante.h"
 
-#define WINDOW_WITDH 800
-#define WINDOW_HEIGHT 600
-
 SDL_Texture *texture;
 SDL_Renderer *rendu;
 SDL_Window *window;
 SDL_Rect positionfond;
 SDL_Rect position, positionjoueur;
 SDL_Texture *textL;
-
 
 enum
 {
@@ -25,14 +21,10 @@ enum
     LINK
 };
 
-
 void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjoueur);
 void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction);
 void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45]);
-
 void jouer(SDL_Surface *fond);
-
-
 
 //affiche Mur
 /*SDL_Texture *textM;

@@ -14,7 +14,7 @@ int main(int argc, char **argv){
     if(SDL_Init(SDL_INIT_EVERYTHING)!=0)
         ExitWithError("impossible d'initialiser");
     
-    if (SDL_CreateWindowAndRenderer(WINDOW_WITDH, WINDOW_HEIGHT, 0, &window, &renderer) != 0)
+    if (SDL_CreateWindowAndRenderer(WINDOW_WITDH, WINDOW_HEIGHT, 0, &win, &ren) != 0)
         ExitWithError("impossible de creer la fenêtre et le rendu");
     unsigned int fram_limit = 0;
     fram_limit = SDL_GetTicks() + 16; //delai pr limiter à 60fps
@@ -24,25 +24,22 @@ int main(int argc, char **argv){
 
     menu = SDL_LoadBMP("src/img/acceuil.bmp");
     if (menu == NULL)
-        ExitChargement("impossiblde de charger le fond", renderer, window);
+        ExitChargement("impossiblde de charger le fond", ren, window);
 
-    texture = SDL_CreateTextureFromSurface(renderer, menu);
+    text = SDL_CreateTextureFromSurface(ren, menu);
     SDL_FreeSurface(menu);
-    if (texture == NULL)
-        ExitChargement("impossible de créer la texture", renderer, window);
+    if (text == NULL)
+        ExitChargement("impossible de créer la texture", ren, window);
 
-    if (SDL_QueryTexture(texture, NULL, NULL, &positionMenu.w, &positionMenu.h) != 0)
-        ExitChargement("impossible charger le conteneur du fond", renderer, window);
+    if (SDL_QueryTexture(text, NULL, NULL, &positionMenu.w, &positionMenu.h) != 0)
+        ExitChargement("impossible charger le conteneur du fond", ren, window);
 
     positionMenu.x = (WINDOW_WITDH - positionMenu.w) / 2;
     positionMenu.x = (WINDOW_HEIGHT - positionMenu.h) / 2;
-    if (SDL_RenderCopy(renderer, texture, NULL, &positionMenu) != 0)
-        ExitChargement("impossible d'afficher la texture", renderer, window);
+    if (SDL_RenderCopy(ren, text, NULL, &positionMenu) != 0)
+        ExitChargement("impossible d'afficher la texture", ren, window);
 
-    SDL_RenderPresent(renderer);
-    /*----------------------------------------------*/
-
-    /*----------------------------------------------*/
+    SDL_RenderPresent(ren);
 
     int continuer = 3;
     while (continuer == 3)
@@ -60,7 +57,7 @@ int main(int argc, char **argv){
                         break;
                     case SDLK_1:
                         continuer=1;
-                        SDL_DestroyWindow(window);
+                        SDL_DestroyWindow(win);
                         jouer(fond);
                         break;
                     default:
@@ -77,8 +74,8 @@ int main(int argc, char **argv){
     }
     
 /*---------------------------------------------*/
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(ren);
+    SDL_DestroyWindow(win);
     SDL_Quit();
     return 0;
 }

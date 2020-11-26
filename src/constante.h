@@ -1,4 +1,6 @@
 #define TAILLE_BLOC 17
+#define WINDOW_WITDH 800
+#define WINDOW_HEIGHT 600
 
 SDL_Surface *DROITE[4];
 SDL_Surface *GAUCHE[4];
