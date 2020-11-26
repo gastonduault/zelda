@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <SDL.h>
 #include <stdbool.h>
-#include "jouer.h"
+#include "../head/jouer.h"
 
 void limit_fps(unsigned int limit)
 {

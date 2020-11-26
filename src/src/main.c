@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <SDL.h>
 #include <stdbool.h>
-#include "main.h"
-#include "jouer.h"
-#include "constante.h"
-/*  gcc src/*.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
+#include "../head/main.h"
+#include "../head/jouer.h"
+#include "../head/constante.h"
+/*  gcc src/src/*.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2 
     bin\prog.exe
 */
 int main(int argc, char **argv){

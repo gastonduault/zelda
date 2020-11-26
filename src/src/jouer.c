@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <SDL.h>
 #include <stdbool.h>
-#include "constante.h"
-#include "jouer.h"
+#include "../head/constante.h"
+#include "../head/jouer.h"
 
 
 void jouer(SDL_Surface *fond){

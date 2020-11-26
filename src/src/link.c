@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "jouer.h"
+#include "../head/jouer.h"
 
 
 void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjoueur)
