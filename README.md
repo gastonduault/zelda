@@ -39,8 +39,69 @@ Petit jeu en C avec la bibliothèque SDL 2.0
 </ul>
 
 <br />
-<img src="src/img/zeldamap.bmp">
+<table>
+    <tr>
+        <td>
+            <img src="src/img/zeldamap.bmp">
+        </td>
+        <td>
+            <img src="src/img/Maison.bmp">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="src/img/map2.png">
+        </td>
+    </tr>
+</table>
 <hr />
-
 <br />
-
+<table>
+<tr>
+        <td>
+            <img src="src/img/linkH.bmp">
+        <td>
+        <td>
+            <img src="src/img/linkH1.bmp">
+        </td>
+        <td>
+            <img src="src/img/linkH2.bmp">
+        </td>
+        <td>
+            <img src="src/img/epee.png">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="src/img/linkB.bmp">
+        <td>
+        <td>
+            <img src="src/img/linkB1.bmp">
+        </td>
+        <td>
+            <img src="src/img/linkB2.bmp">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="src/img/linkG.bmp">
+        <td>
+        <td>
+            <img src="src/img/linkG1.bmp">
+        </td>
+        <td>
+            <img src="src/img/linkG2.bmp">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="src/img/linkR.bmp">
+        <td>
+        <td>
+            <img src="src/img/linkR1.bmp">
+        </td>
+        <td>
+            <img src="src/img/linkR2.bmp">
+        </td>
+    </tr>
+</table>

@@ -368,14 +368,12 @@ void jouer(SDL_Surface *fond){
     texture = SDL_CreateTextureFromSurface(rendu, fond);
     SDL_FreeSurface(fond);
     if (SDL_QueryTexture(texture, NULL, NULL, &positionfond.w, &positionfond.h) != 0){
-        printf("impossible charger le conteneur du fond");
-        SDL_QUIT;
+        ExitWithError("impossible charger le conteneur du fond");
     }
     positionfond.x = (791 - positionfond.w) / 2;
     positionfond.x = (575 - positionfond.h) / 2;
     if (SDL_RenderCopy(rendu, texture, NULL, &positionfond) != 0){
-        printf("impossible d'afficher la texture");
-        SDL_QUIT;
+        ExitChargement("impossible d'afficher la texture", rendu, window);
     }
 
     unsigned int fram_limit = 0;
