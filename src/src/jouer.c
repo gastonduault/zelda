@@ -357,6 +357,9 @@ void jouer(SDL_Surface *fond){
     EPED[2] = SDL_LoadBMP("src/img/epeeD2.bmp");
     EPED[3] = SDL_LoadBMP("src/img/epeeD3.bmp");
     
+    CELEB[1] = SDL_LoadBMP("src/img/celebration1.bmp");
+    CELEB[2] = SDL_LoadBMP("src/img/celebration2.bmp");
+
     LinkActuel=BAS[1];
     positionjoueur.x=6;
     positionjoueur.y=6;
@@ -469,14 +472,18 @@ void jouer(SDL_Surface *fond){
                 case SDLK_ESCAPE:
                     continuer = 0;
                     break;
+                case SDLK_SPACE:
+                    epee(LinkActuel, positionjoueur, rendu, carte);
+                    break;
+                case SDLK_c:
+                    celebretion(positionjoueur,rendu);
+                    break;
                 }
-            case SDLK_SPACE:
-                epee(LinkActuel, positionjoueur, rendu, carte);
-                break;
             }
-            }
-            afficher(rendu, LinkActuel, positionjoueur);
         }
+            afficher(rendu, LinkActuel, positionjoueur);
+    }
+
     for(i=0;i<4;i++){
         SDL_FreeSurface(Link[i]);
     }

@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include "../head/jouer.h"
 
-
 void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjoueur)
 {
     SDL_RenderClear(rendu);
@@ -190,5 +189,28 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
         break;
     default:
         break;
+    }
+}
+
+void celebretion(SDL_Rect positionjoueur, SDL_Renderer *rendu){
+    int etat, i;
+    SDL_Surface *LinkCelebration;
+    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
+    while (keystates[SDL_SCANCODE_C]){
+        i = 1;
+        LinkCelebration = CELEB[i];
+        afficher(rendu, LinkCelebration, positionjoueur);
+        SDL_Delay(100);
+        while (keystates[SDL_SCANCODE_C])
+        {
+            i = 2;
+            LinkCelebration = CELEB[i];
+            afficher(rendu, LinkCelebration, positionjoueur);
+            SDL_PumpEvents();
+        }
+        i = 1;
+        LinkCelebration = CELEB[i];
+        afficher(rendu, LinkCelebration, positionjoueur);
+        SDL_Delay(100);
     }
 }

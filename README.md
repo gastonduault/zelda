@@ -67,9 +67,6 @@ Petit jeu en C avec la bibliothèque SDL 2.0
         <td>
             <img src="src/img/linkH2.bmp">
         </td>
-        <td>
-            <img src="src/img/epee.png">
-        </td>
     </tr>
     <tr>
         <td>
@@ -105,3 +102,4 @@ Petit jeu en C avec la bibliothèque SDL 2.0
         </td>
     </tr>
 </table>
+<img src="src/img/epee.PNG">
