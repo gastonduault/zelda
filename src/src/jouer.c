@@ -378,9 +378,7 @@ void jouer(SDL_Surface *fond){
     if (SDL_RenderCopy(rendu, texture, NULL, &positionfond) != 0){
         ExitChargement("impossible d'afficher la texture", rendu, window);
     }
-
     unsigned int fram_limit = 0;
-
     SDL_Event event;
     while (continuer!=0){
         fram_limit = SDL_GetTicks() + 16; //delai pr limiter à 60fps

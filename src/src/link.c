@@ -8,21 +8,18 @@ void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjou
     SDL_RenderClear(rendu);
     if (SDL_RenderCopy(rendu, texture, NULL, &positionfond) != 0)
     {
-        printf("impossible d'afficher la texture");
-        SDL_QUIT;
+        ExitWithError("impossible d'afficher la texture");
     }
     textL = SDL_CreateTextureFromSurface(rendu, LinkActuel);
     if (SDL_QueryTexture(textL, NULL, NULL, &position.w, &position.h) != 0)
     {
-        printf("impossible charger le conteneur de link");
-        SDL_QUIT;
+        ExitChargement("impossible charger le conteneur de link",rendu, texture);
     }
     position.x = positionjoueur.x * TAILLE_BLOC;
     position.y = positionjoueur.y * TAILLE_BLOC;
     if (SDL_RenderCopy(rendu, textL, NULL, &position) != 0)
     {
-        printf("impossible d'afficher la texture de link");
-        SDL_QUIT;
+        ExitWithError("impossible d'afficher la texture de link");
     }
     SDL_RenderPresent(rendu);
 }
@@ -201,6 +198,7 @@ void celebretion(SDL_Rect positionjoueur, SDL_Renderer *rendu){
         LinkCelebration = CELEB[i];
         afficher(rendu, LinkCelebration, positionjoueur);
         SDL_Delay(100);
+        SDL_PumpEvents();
         while (keystates[SDL_SCANCODE_C])
         {
             i = 2;
@@ -211,6 +209,7 @@ void celebretion(SDL_Rect positionjoueur, SDL_Renderer *rendu){
         i = 1;
         LinkCelebration = CELEB[i];
         afficher(rendu, LinkCelebration, positionjoueur);
-        SDL_Delay(100);
+        SDL_Delay(70);
+        SDL_PumpEvents();
     }
 }

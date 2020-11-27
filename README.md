@@ -6,6 +6,7 @@ Petit jeu en C avec la bibliothèque SDL 2.0
     <ul>
         <li>rentrer dans la maison</li>
         <li>aller plus loin dans la map</li>
+        <li>Célébration de Link</li>
     </ul>
 </ul>
 <h2>Jouer au jeu</h2>
@@ -15,19 +16,19 @@ Petit jeu en C avec la bibliothèque SDL 2.0
 <h2>Les commandes du jeu :</h2>
 <ul>
     <li>
-        <strong>Droite :</strong> flèche de droite du pavé numérique
+        <strong>droite :</strong> flèche de droite du pavé numérique
     </li>
     <li>
-        <strong>Gauche :</strong> flèche de gauche du pavé numérique
+        <strong>gauche :</strong> flèche de gauche du pavé numérique
     </li>
     <li>
-        <strong>Bas :</strong> flèche du bas du pavé numérique
+        <strong>bas :</strong> flèche du bas du pavé numérique
     </li>
     <li>
-        <strong>Haut :</strong> flèche du haut du pavé numérique
+        <strong>haut :</strong> flèche du haut du pavé numérique
     </li>
     <li>
-        <strong>Sortir épée :</strong> escpace
+        <strong>sortir épée :</strong> escpace
     </li>
     <li>
         <strong>Quitter :</strong> Touche échape
