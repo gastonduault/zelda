@@ -13,7 +13,7 @@ void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjou
     textL = SDL_CreateTextureFromSurface(rendu, LinkActuel);
     if (SDL_QueryTexture(textL, NULL, NULL, &position.w, &position.h) != 0)
     {
-        ExitChargement("impossible charger le conteneur de link",rendu, texture);
+        ExitChargement("impossible charger le conteneur de link",rendu, window);
     }
     position.x = positionjoueur.x * TAILLE_BLOC;
     position.y = positionjoueur.y * TAILLE_BLOC;
@@ -212,4 +212,31 @@ void celebretion(SDL_Rect positionjoueur, SDL_Renderer *rendu){
         SDL_Delay(70);
         SDL_PumpEvents();
     }
+}
+
+/*carte[4][5] = 1;
+    carte[3][5] = 1;
+    carte[3][4] = 1;
+    carte[4][4] = 1;*/
+
+bool devantPort(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45]){
+    bool porte = false;
+    if(positionjoueur.x==4 && positionjoueur.y==5){
+        porte=true;
+    }
+    else if(positionjoueur.x==3 && positionjoueur.y==5){
+        porte=true;
+    }
+    else if (positionjoueur.x == 3 && positionjoueur.y == 4)
+    {
+        porte = true;
+    }
+    else if (positionjoueur.x == 4 && positionjoueur.y == 4)
+    {
+        porte = true;
+    }
+    else{
+        porte=false;
+    }
+    return porte;
 }

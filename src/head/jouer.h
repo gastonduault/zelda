@@ -24,12 +24,16 @@ enum
 
 
 void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjoueur);
+
 void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction);
+bool devantPort(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45]);
 void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45]);
 void celebretion(SDL_Rect positionjoueur, SDL_Renderer *rendu);
+
 void ExitWithError(const char *message);
 void ExitChargement(const char *message, SDL_Renderer *rendu, SDL_Window *window);
 void limit_fps(unsigned int limit);
+
 void jouer(SDL_Surface *fond);
 
 //affiche Mur

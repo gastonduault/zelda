@@ -72,7 +72,7 @@ void jouer(SDL_Surface *fond){
     carte[3][2] = 1;
     carte[3][3] = 1;
     carte[3][4] = 1;
-    carte[3][5] = 1;
+    carte[3][5] = 0;//porte maison
     carte[3][6] = 1;
     carte[3][14] = 1;
     carte[3][15] = 1;
@@ -317,6 +317,10 @@ void jouer(SDL_Surface *fond){
     carte[34][13] = 1;
     carte[34][14] = 1;
     carte[34][15] = 1;
+    /*carte[4][5] = 1;
+    carte[3][5] = 1;
+    carte[3][4] = 1;
+    carte[4][4] = 1;*/
 
     SDL_Surface *Link[4] = {NULL};
     SDL_Surface *LinkActuel = NULL;
@@ -464,6 +468,9 @@ void jouer(SDL_Surface *fond){
                     }
                     LinkActuel = GAUCHE[3];
                     afficher(rendu, LinkActuel, positionjoueur);
+                }
+                if(devantPort(positionjoueur, rendu, carte)){
+                    printf("\ndevantporte");
                 }
                 switch (event.key.keysym.sym)
                 {
