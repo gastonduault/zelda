@@ -377,8 +377,8 @@ void jouer(SDL_Surface *fond){
     if (SDL_QueryTexture(texture, NULL, NULL, &positionfond.w, &positionfond.h) != 0){
         ExitWithError("impossible charger le conteneur du fond");
     }
-    positionfond.x = (791 - positionfond.w) / 2;
-    positionfond.x = (575 - positionfond.h) / 2;
+    positionfond.x = (WINDOW_WITDH - positionfond.w) / 2;
+    positionfond.x = (WINDOW_HEIGHT - positionfond.h) / 2;
     if (SDL_RenderCopy(rendu, texture, NULL, &positionfond) != 0){
         ExitChargement("impossible d'afficher la texture", rendu, window);
     }
