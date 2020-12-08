@@ -22,8 +22,7 @@ enum
     LINK
 };
 
-
-
+int carte[35][45];
 void jouer(SDL_Surface *fond);
 
 //affiche Mur

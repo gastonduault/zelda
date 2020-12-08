@@ -215,14 +215,104 @@ void celebretion(SDL_Rect positionjoueur, SDL_Renderer *rendu){
     }
 }
 
-/*carte[4][5] = 1;
-    carte[3][5] = 1;
-    carte[3][4] = 1;
-    carte[4][4] = 1;*/
 
-bool devantPort(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45], bool maison){
+
+
+
+
+
+
+
+
+void mouvement(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect *positionjoueur, int carte[][45], bool keys[322]){
+    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
+    int i,j;
+    if (keys[SDL_SCANCODE_UP])
+    {
+        i = 0;
+        while (keystates[SDL_SCANCODE_UP])
+        {
+            i++;
+            LinkActuel = HAUT[i];
+            afficher(rendu, LinkActuel, *positionjoueur);
+            SDL_Delay(70);
+            deplacerjoueur(carte, positionjoueur, haut);
+            SDL_PumpEvents();
+            if (i >= 3)
+                i = 0;
+        }
+        LinkActuel = HAUT[3];
+        afficher(rendu, LinkActuel, *positionjoueur);
+    }
+    else if (keys[SDL_SCANCODE_DOWN])
+    {
+        i = 0;
+        while (keystates[SDL_SCANCODE_DOWN])
+        {
+            i++;
+            LinkActuel = BAS[i];
+            afficher(rendu, LinkActuel, *positionjoueur);
+            SDL_Delay(70);
+            deplacerjoueur(carte, positionjoueur, bas);
+            SDL_PumpEvents();
+            if (i >= 3)
+                i = 0;
+        }
+        LinkActuel = BAS[3];
+        afficher(rendu, LinkActuel, *positionjoueur);
+    }
+    else if (keys[SDL_SCANCODE_RIGHT])
+    {
+        i = 0;
+        while (keystates[SDL_SCANCODE_RIGHT])
+        {
+            i++;
+            LinkActuel = DROITE[i];
+            afficher(rendu, LinkActuel, *positionjoueur);
+            SDL_Delay(70);
+            deplacerjoueur(carte, positionjoueur, droite);
+            SDL_PumpEvents();
+            if (i >= 3)
+                i = 0;
+        }
+        LinkActuel = DROITE[3];
+        afficher(rendu, LinkActuel, *positionjoueur);
+    }
+    else if (keys[SDL_SCANCODE_LEFT])
+    {
+        i = 0;
+        while (keystates[SDL_SCANCODE_LEFT])
+        {
+            i++;
+            LinkActuel = GAUCHE[i];
+            afficher(rendu, LinkActuel, *positionjoueur);
+            SDL_Delay(70);
+            deplacerjoueur(carte, positionjoueur, gauche);
+            SDL_PumpEvents();
+            if (i >= 3)
+                i = 0;
+        }
+        LinkActuel = GAUCHE[3];
+        afficher(rendu, LinkActuel, *positionjoueur);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+bool devantPort(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45], bool maison)
+{
     bool porte = false;
-    if(!maison){
+    if (!maison)
+    {
         if (positionjoueur.x == 3 && positionjoueur.y == 4)
         {
             porte = true;
@@ -232,8 +322,17 @@ bool devantPort(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45], b
             porte = true;
         }
     }
-    else{
-        porte=false;
+    return porte;
+}
+bool sortmaison(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45], bool maison)
+{
+    bool porte = false;
+    if (maison)
+    {
+        if (positionjoueur.x == 3 && positionjoueur.y == 3)
+        {
+            porte = true;
+        }
     }
     return porte;
 }
