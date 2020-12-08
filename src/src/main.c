@@ -5,6 +5,7 @@
 #include "../head/main.h"
 #include "../head/jouer.h"
 #include "../head/constante.h"
+#include "../head/mainson.h"
 /*  gcc src/src/*.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2 
     bin\prog.exe
 */

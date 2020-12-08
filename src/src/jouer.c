@@ -4,13 +4,21 @@
 #include <stdbool.h>
 #include "../head/constante.h"
 #include "../head/jouer.h"
+#include "../head/mainson.h"
 
 
 void jouer(SDL_Surface *fond){
+    bool dansmaison;
+    bool keys[322] = {false};
+    bool stop = false;
+    int temp_actuel = 0;
+    int temp_precedent = 0;
     int continuer = 1;
     int i = 0, j = 0;
+    int a = 35, b = 45;
 
-    int carte[35][45];
+    int carte[a][b];
+
     for (i = 0; i < 34; i++)
     {
         for (j = 0; j < 45; j++)
@@ -321,14 +329,9 @@ void jouer(SDL_Surface *fond){
     carte[3][5] = 1;
     carte[3][4] = 1;
     carte[4][4] = 1;*/
-
+    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
     SDL_Surface *Link[4] = {NULL};
     SDL_Surface *LinkActuel = NULL;
-    bool keys[322] = {false};
-    bool stop = false;
-    int temp_actuel = 0;
-    int temp_precedent = 0;
-    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
 
     BAS[3]=SDL_LoadBMP("src/img/linkB.bmp");
     BAS[2] = SDL_LoadBMP("src/img/linkB1.bmp");
@@ -368,6 +371,8 @@ void jouer(SDL_Surface *fond){
     positionjoueur.x=6;
     positionjoueur.y=6;
     carte[6][6]=LINK;
+    
+    dansmaison=false;
 
     fond = SDL_LoadBMP("src/img/zeldamap.bmp");
     window=SDL_CreateWindow("ZELDA !", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WITDH, WINDOW_HEIGHT, 0);
@@ -377,14 +382,14 @@ void jouer(SDL_Surface *fond){
     if (SDL_QueryTexture(texture, NULL, NULL, &positionfond.w, &positionfond.h) != 0){
         ExitWithError("impossible charger le conteneur du fond");
     }
-    positionfond.x = (WINDOW_WITDH - positionfond.w) / 2;
-    positionfond.x = (WINDOW_HEIGHT - positionfond.h) / 2;
+    positionfond.x = (791 - positionfond.w) / 2;
+    positionfond.x = (575 - positionfond.h) / 2;
     if (SDL_RenderCopy(rendu, texture, NULL, &positionfond) != 0){
         ExitChargement("impossible d'afficher la texture", rendu, window);
-    }
+    }    
     unsigned int fram_limit = 0;
     SDL_Event event;
-    while (continuer!=0){
+    while (continuer==1){
         fram_limit = SDL_GetTicks() + 16; //delai pr limiter à 60fps
         limit_fps(fram_limit);
         while (SDL_PollEvent(&event))
@@ -469,8 +474,16 @@ void jouer(SDL_Surface *fond){
                     LinkActuel = GAUCHE[3];
                     afficher(rendu, LinkActuel, positionjoueur);
                 }
-                if(devantPort(positionjoueur, rendu, carte)){
-                    printf("\ndevantporte");
+                if(devantPort(positionjoueur, rendu, carte, dansmaison)){
+                    dansmaison=true;
+                    for (i = 0; i < 34; i++)
+                    {
+                        for (j = 0; j < 45; j++)
+                        {
+                            carte[i][j] = 0;
+                        }
+                    }
+                    maison(fond);
                 }
                 switch (event.key.keysym.sym)
                 {

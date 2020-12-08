@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "../head/constante.h"
 #include "../head/jouer.h"
 
 void afficher(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect positionjoueur)
@@ -219,21 +220,17 @@ void celebretion(SDL_Rect positionjoueur, SDL_Renderer *rendu){
     carte[3][4] = 1;
     carte[4][4] = 1;*/
 
-bool devantPort(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45]){
+bool devantPort(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45], bool maison){
     bool porte = false;
-    if(positionjoueur.x==4 && positionjoueur.y==5){
-        porte=true;
-    }
-    else if(positionjoueur.x==3 && positionjoueur.y==5){
-        porte=true;
-    }
-    else if (positionjoueur.x == 3 && positionjoueur.y == 4)
-    {
-        porte = true;
-    }
-    else if (positionjoueur.x == 4 && positionjoueur.y == 4)
-    {
-        porte = true;
+    if(!maison){
+        if (positionjoueur.x == 3 && positionjoueur.y == 4)
+        {
+            porte = true;
+        }
+        else if (positionjoueur.x == 4 && positionjoueur.y == 4)
+        {
+            porte = true;
+        }
     }
     else{
         porte=false;

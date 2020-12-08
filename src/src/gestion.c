@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <SDL.h>
 #include <stdbool.h>
-#include "../head/jouer.h"
+#include "../head/constante.h"
 
 void limit_fps(unsigned int limit)
 {
@@ -27,3 +27,4 @@ void ExitWithError(const char *message)
     SDL_Log("Erreur : %s > %s\n", message, SDL_GetError());
     SDL_Quit();
 }
+
