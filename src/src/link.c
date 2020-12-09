@@ -308,31 +308,30 @@ void mouvement(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect *positionj
 
 
 
-bool devantPort(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45], bool maison)
+bool devantPort(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45])
 {
     bool porte = false;
-    if (!maison)
+    /*if (positionjoueur.x == 3 && positionjoueur.y == 4)
     {
-        if (positionjoueur.x == 3 && positionjoueur.y == 4)
-        {
-            porte = true;
-        }
-        else if (positionjoueur.x == 4 && positionjoueur.y == 4)
-        {
-            porte = true;
-        }
+        porte = true;
+    }*/
+    if (positionjoueur.x == 4 && positionjoueur.y == 4)
+    {
+        porte = true;
     }
     return porte;
 }
-bool sortmaison(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45], bool maison)
+
+bool sortmaison(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45])
 {
     bool porte = false;
-    if (maison)
+    if (positionjoueur.x == 7 && positionjoueur.y == 11)
     {
-        if (positionjoueur.x == 3 && positionjoueur.y == 3)
-        {
-            porte = true;
-        }
+        porte = true;
+    }
+    else if (positionjoueur.x == 8 && positionjoueur.y == 11)
+    {
+        porte = true;
     }
     return porte;
 }

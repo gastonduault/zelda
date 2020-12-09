@@ -4,6 +4,9 @@
 #include <stdbool.h>
 #include "../head/constante.h"
 
+const int LARGEUR = 35;
+const int HAUTEUR = 45;
+
 void limit_fps(unsigned int limit)
 {
     unsigned int ticks = SDL_GetTicks(); //on synchronise le fps
@@ -28,11 +31,11 @@ void ExitWithError(const char *message)
     SDL_Quit();
 }
 
-void initialiserCarte(int carte[][45], int largeur, int hauteur){
+void initialiserCarte(int carte[][45]){
     int i,j;
-    for (i = 0; i < largeur; i++)
+    for (i = 0; i < LARGEUR; i++)
     {
-        for (j = 0; j < hauteur; j++)
+        for (j = 0; j < HAUTEUR; j++)
         {
             carte[i][j] = 0;
         }
