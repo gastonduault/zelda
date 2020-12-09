@@ -16,14 +16,7 @@ void jouer(SDL_Surface *fond){
     int continuer = 1;
     int i = 0, j = 0;
     int a = 35, b = 45;
-
-    for (i = 0; i < 34; i++)
-    {
-        for (j = 0; j < 45; j++)
-        {
-            carte[i][j] = 0;
-        }
-    }
+    initialiserCarte(carte, a, b);
     carte[0][0] = 1;
     carte[0][1] = 1;
     carte[0][2] = 1;
@@ -405,13 +398,7 @@ void jouer(SDL_Surface *fond){
                     if (devantPort(positionjoueur, rendu, carte, dansmaison)){
                         dansmaison=true;
                         SDL_DestroyWindow(window);
-                        /*for (i = 0; i < 34; i++)
-                        {
-                            for (j = 0; j < 45; j++)
-                            {
-                                carte[i][j] = 0;
-                            }
-                        }*/
+                        initialiserCarte(carte, a, b);
                         continuer=2;
                         maison(fond);
                     }

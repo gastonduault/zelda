@@ -28,3 +28,13 @@ void ExitWithError(const char *message)
     SDL_Quit();
 }
 
+void initialiserCarte(int carte[][45], int largeur, int hauteur){
+    int i,j;
+    for (i = 0; i < largeur; i++)
+    {
+        for (j = 0; j < hauteur; j++)
+        {
+            carte[i][j] = 0;
+        }
+    }
+}
