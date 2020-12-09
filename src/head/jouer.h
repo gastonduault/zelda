@@ -7,6 +7,7 @@ SDL_Rect positionfond;
 SDL_Rect position, positionjoueur;
 SDL_Texture *textL;
 
+SDL_Surface *LinkActuel;
 
 enum
 {

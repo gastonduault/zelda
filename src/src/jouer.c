@@ -328,7 +328,7 @@ void jouer(SDL_Surface *fond){
     carte[3][4] = 1;
     carte[4][4] = 1;*/
 
-    SDL_Surface *LinkActuel = NULL;
+    
     BAS[3] = SDL_LoadBMP("src/img/linkB.bmp");
     BAS[2] = SDL_LoadBMP("src/img/linkB1.bmp");
     BAS[1] = SDL_LoadBMP("src/img/linkB2.bmp");
@@ -402,17 +402,17 @@ void jouer(SDL_Surface *fond){
                 case SDL_KEYDOWN:
                     keys[event.key.keysym.scancode] = true;
                     mouvement(rendu,LinkActuel,&positionjoueur,carte,keys);
-                    if (devantPort(positionjoueur, rendu, carte, dansmaison))
-                    {
+                    if (devantPort(positionjoueur, rendu, carte, dansmaison)){
                         dansmaison=true;
-                        for (i = 0; i < 34; i++)
+                        SDL_DestroyWindow(window);
+                        /*for (i = 0; i < 34; i++)
                         {
                             for (j = 0; j < 45; j++)
                             {
                                 carte[i][j] = 0;
                             }
-                        }
-                        SDL_DestroyWindow(window);
+                        }*/
+                        continuer=2;
                         maison(fond);
                     }
                     switch (event.key.keysym.sym){
@@ -426,6 +426,7 @@ void jouer(SDL_Surface *fond){
                             celebretion(positionjoueur,rendu);
                             break;
                     }
+                    break;
                 }
             }
         }
