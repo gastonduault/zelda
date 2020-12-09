@@ -66,38 +66,27 @@ void maison(SDL_Surface *fond){
     carte[7][14] = 1;
     carte[8][13] = 1;
     carte[9][14] = 1;
-    
+    carte[10][14] = 1;
+    carte[10][13] = 1;
+    carte[10][12] = 1;
+    carte[10][11] = 1;
+    carte[10][10] = 1;
+    carte[10][9] = 1;
+    carte[10][8] = 1;       //porte droite
+    carte[11][8] = 1;
+    carte[11][6] = 1;
+    carte[12][7] = 1;
+    carte[10][6] = 1;
+    carte[9][5] = 1;
+    carte[8][5] = 1;
+    carte[8][4] = 1;
+    carte[8][3] = 1;
+    carte[8][2] = 1;
+    carte[8][1] = 1;
+    carte[7][1] = 1;
 
     SDL_Event event;
     while (continuer == 2){
-        SDL_Texture *textM;
-        SDL_Surface *mur = NULL;
-        mur = SDL_LoadBMP("src/img/mur.bmp");
-        for (i = 0; i < 35; i++)
-        {
-            for (j = 0; j < 50; j++)
-            {
-                position.x = j * TAILLE_BLOC;
-                position.y = i * TAILLE_BLOC;
-                switch (carte[i][j])
-                {
-                case MUR:
-                    textM = SDL_CreateTextureFromSurface(rendu, mur);
-                    if (SDL_QueryTexture(textM, NULL, NULL, &position.w, &position.h) != 0)
-                    {
-                        printf("impossible charger le conteneur de mur");
-                        SDL_QUIT;
-                    }
-                    if (SDL_RenderCopy(rendu, textM, NULL, &position) != 0)
-                    {
-                        printf("impossible d'afficher la texture de mur");
-                        SDL_QUIT;
-                    }
-                    SDL_RenderPresent(rendu);
-                    break;
-                }
-            }
-        }
             while (SDL_PollEvent(&event))
             {
                 switch (event.type)
