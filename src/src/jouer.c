@@ -316,8 +316,7 @@ void jouer(SDL_Surface *fond){
     carte[34][13] = 1;
     carte[34][14] = 1;
     carte[34][15] = 1;
-    /*carte[4][5] = 1;
-    carte[3][5] = 1;
+    /*carte[3][5] = 1;
     carte[3][4] = 1;
     carte[4][4] = 1;*/
 

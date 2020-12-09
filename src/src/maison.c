@@ -27,30 +27,98 @@ void maison(SDL_Surface *fond){
         ExitChargement("impossible d'afficher la texture", rendu, window);
     }
     afficher(rendu, LinkActuel, positionjoueur);
-    SDL_Event event;
-    while (continuer == 2)
     
-    {
-        SDL_Event event;
-        while (SDL_PollEvent(&event)){
-            switch (event.type){
-            case SDL_KEYUP:
-                keys[event.key.keysym.scancode] = false;
-                break;
-            case SDL_KEYDOWN:
-                keys[event.key.keysym.scancode] = true;
-                mouvement(rendu, LinkActuel, &positionjoueur, carte, keys);
-                switch (event.key.keysym.sym){
-                case SDLK_ESCAPE:
+    carte[0][6] = 1;
+    carte[0][7] = 1;
+    carte[0][8] = 1;
+    carte[0][9] = 1;
+    carte[0][10] = 1;
+    carte[0][11] = 1;
+    carte[0][12] = 1;
+    carte[0][13] = 1;
+    carte[0][14] = 1;
+    carte[1][14] = 1;
+    carte[1][5] = 1;
+    carte[2][5] = 1;
+    carte[2][14] = 1;
+    carte[3][3] = 1;
+    carte[3][4] = 1;
+    carte[3][5] = 1;
+    carte[3][10] = 1;
+    carte[3][11] = 1;
+    carte[3][14] = 1;
+    carte[4][1] = 1;
+    carte[4][2] = 1;
+    carte[4][9] = 1;        
+    carte[4][14] = 1;
+    carte[4][12] = 1;
+    carte[4][10] = 1;
+    carte[5][14] = 1;
+    carte[5][1] = 1;
+    carte[5][9] = 1;        //Bas gauche table
+    carte[5][12] = 1;
+    carte[5][10] = 1;
+    carte[5][11] = 1;
+    carte[6][11] = 1;
+    carte[6][10] = 1;
+    carte[6][1] = 1;
+    carte[6][14] = 1;
+    carte[7][14] = 1;
+    carte[8][13] = 1;
+    carte[9][14] = 1;
+    
+
+    SDL_Event event;
+    while (continuer == 2){
+        SDL_Texture *textM;
+        SDL_Surface *mur = NULL;
+        mur = SDL_LoadBMP("src/img/mur.bmp");
+        for (i = 0; i < 35; i++)
+        {
+            for (j = 0; j < 50; j++)
+            {
+                position.x = j * TAILLE_BLOC;
+                position.y = i * TAILLE_BLOC;
+                switch (carte[i][j])
+                {
+                case MUR:
+                    textM = SDL_CreateTextureFromSurface(rendu, mur);
+                    if (SDL_QueryTexture(textM, NULL, NULL, &position.w, &position.h) != 0)
+                    {
+                        printf("impossible charger le conteneur de mur");
+                        SDL_QUIT;
+                    }
+                    if (SDL_RenderCopy(rendu, textM, NULL, &position) != 0)
+                    {
+                        printf("impossible d'afficher la texture de mur");
+                        SDL_QUIT;
+                    }
+                    SDL_RenderPresent(rendu);
+                    break;
+                }
+            }
+        }
+            while (SDL_PollEvent(&event))
+            {
+                switch (event.type)
+                {
+                case SDL_KEYUP:
+                    keys[event.key.keysym.scancode] = false;
+                    break;
+                case SDL_KEYDOWN:
+                    keys[event.key.keysym.scancode] = true;
+                    mouvement(rendu, LinkActuel, &positionjoueur, carte, keys);
+                    switch (event.key.keysym.sym){
+                    case SDLK_ESCAPE:
+                        continuer = 0;
+                        break;
+                    default:
+                        continue;
+                    }
+                    break;
+                case SDL_QUIT:
                     continuer = 0;
                     break;
-                default:
-                    continue;
-                }
-                break;
-            case SDL_QUIT:
-                continuer = 0;
-                break;
             }
         }
     }
