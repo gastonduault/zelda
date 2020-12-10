@@ -6,7 +6,7 @@ Petit jeu en C avec la bibliothèque SDL 2.0
     <ul>
         <li>aller plus loin dans la map</li>
         <li>Célébration de Link</li>
-        <li>Animation lorsque Link essaye de sortir son épée dans la maison<li>
+        <li>Animation lorsque Link essaye de sortir son épée dans la maison</li>
     </ul>
 </ul>
 <h2>Jouer au jeu</h2>
