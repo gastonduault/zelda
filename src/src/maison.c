@@ -26,8 +26,8 @@ void maison(SDL_Surface *fond){
     {
         ExitChargement("impossible d'afficher la texture", rendu, window);
     }
-    
-    
+
+    initialiserCarte(carte);
     carte[0][6] = 1;
     carte[0][7] = 1;
     carte[0][8] = 1;
@@ -105,9 +105,11 @@ void maison(SDL_Surface *fond){
                     break;
                 case SDL_KEYDOWN:
                     keys[event.key.keysym.scancode] = true;
-                    mouvement(rendu, LinkActuel, &positionjoueur, carte, keys);
+                    mouvement(rendu, LinkActuel, &positionjoueur, carte, keys, &direction);
                     if(sortmaison(positionjoueur, rendu, carte)){
-                        printf("sort de la maison");
+                        SDL_DestroyWindow(window);
+                        continuer=1;
+                        jouer(fond);
                     }
                     switch (event.key.keysym.sym){
                     case SDLK_ESCAPE:

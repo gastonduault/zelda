@@ -52,31 +52,13 @@ void deplacerjoueur(int carte[][45], SDL_Rect *pos, int direction)
     }
 }
 
-void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45])
+void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45], int direction)
 {
-    int etat, i;
+    int i;
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
     SDL_Surface *LinkEpee;
-    if ((LinkActuel == BAS[1]) || (LinkActuel == BAS[2]) || (LinkActuel == BAS[3]))
-    {
-        etat = 1;
-    }
-    else if ((LinkActuel == HAUT[1]) || (LinkActuel == HAUT[2]) || (LinkActuel == HAUT[3]))
-    {
-        etat = 2;
-    }
-    else if ((LinkActuel == GAUCHE[1]) || (LinkActuel == GAUCHE[2]) || (LinkActuel == GAUCHE[3]))
-    {
-        etat = 3;
-    }
-    else if ((LinkActuel == DROITE[1]) || (LinkActuel == DROITE[2]) || (LinkActuel == DROITE[3]))
-    {
-        etat = 4;
-    }
 
-    switch (etat)
-    {
-    case 1:
+    if(direction==bas){
         while (keystates[SDL_SCANCODE_SPACE])
         {
             i = 1;
@@ -105,7 +87,8 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
             afficher(rendu, LinkEpee, positionjoueur);
             SDL_Delay(70);
         }
-    case 2:
+    }
+    else if (direction==haut){
         while (keystates[SDL_SCANCODE_SPACE])
         {
             i = 1;
@@ -126,8 +109,8 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
             afficher(rendu, LinkEpee, positionjoueur);
             SDL_Delay(100);
         }
-        break;
-    case 3:
+    }
+    else if(direction==gauche){
         while (keystates[SDL_SCANCODE_SPACE])
         {
             i = 1;
@@ -155,8 +138,8 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
             afficher(rendu, LinkEpee, positionjoueur);
             SDL_Delay(100);
         }
-        break;
-    case 4:
+    }
+    else if(direction==droite){
         while (keystates[SDL_SCANCODE_SPACE])
         {
             i = 1;
@@ -184,9 +167,6 @@ void epee(SDL_Surface *LinkActuel, SDL_Rect positionjoueur, SDL_Renderer *rendu,
             afficher(rendu, LinkEpee, positionjoueur);
             SDL_Delay(100);
         }
-        break;
-    default:
-        break;
     }
 }
 
@@ -224,7 +204,7 @@ void celebretion(SDL_Rect positionjoueur, SDL_Renderer *rendu){
 
 
 
-void mouvement(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect *positionjoueur, int carte[][45], bool keys[322]){
+void mouvement(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect *positionjoueur, int carte[][45], bool keys[322], int *direction){
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
     int i,j;
     if (keys[SDL_SCANCODE_UP])
@@ -243,6 +223,7 @@ void mouvement(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect *positionj
         }
         LinkActuel = HAUT[3];
         afficher(rendu, LinkActuel, *positionjoueur);
+        *direction = haut;
     }
     else if (keys[SDL_SCANCODE_DOWN])
     {
@@ -260,6 +241,7 @@ void mouvement(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect *positionj
         }
         LinkActuel = BAS[3];
         afficher(rendu, LinkActuel, *positionjoueur);
+        *direction = bas;
     }
     else if (keys[SDL_SCANCODE_RIGHT])
     {
@@ -277,6 +259,7 @@ void mouvement(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect *positionj
         }
         LinkActuel = DROITE[3];
         afficher(rendu, LinkActuel, *positionjoueur);
+        *direction = droite;
     }
     else if (keys[SDL_SCANCODE_LEFT])
     {
@@ -294,6 +277,7 @@ void mouvement(SDL_Renderer *rendu, SDL_Surface *LinkActuel, SDL_Rect *positionj
         }
         LinkActuel = GAUCHE[3];
         afficher(rendu, LinkActuel, *positionjoueur);
+        *direction = gauche;
     }
 }
 
@@ -325,7 +309,15 @@ bool devantPort(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45])
 bool sortmaison(SDL_Rect positionjoueur, SDL_Renderer *rendu, int carte[][45])
 {
     bool porte = false;
-    if (positionjoueur.x == 7 && positionjoueur.y == 11)
+    if (positionjoueur.x == 7 && positionjoueur.y == 10)
+    {
+        porte = true;
+    }
+    else if (positionjoueur.x == 8 && positionjoueur.y == 10)
+    {
+        porte = true;
+    }
+    else if (positionjoueur.x == 7 && positionjoueur.y == 11)
     {
         porte = true;
     }

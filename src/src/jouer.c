@@ -353,11 +353,12 @@ void jouer(SDL_Surface *fond){
     CELEB[1] = SDL_LoadBMP("src/img/celebration1.bmp");
     CELEB[2] = SDL_LoadBMP("src/img/celebration2.bmp");
 
-    int direction;
+
     LinkActuel=BAS[3];
     positionjoueur.x=4;
     positionjoueur.y=4;
-    
+    direction=bas;
+
 
     fond = SDL_LoadBMP("src/img/zeldamap.bmp");
     window=SDL_CreateWindow("ZELDA !", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WITDH, WINDOW_HEIGHT, 0);
@@ -389,19 +390,20 @@ void jouer(SDL_Surface *fond){
                     break;
                 case SDL_KEYDOWN:
                     keys[event.key.keysym.scancode] = true;
-                    mouvement(rendu,LinkActuel,&positionjoueur,carte,keys);
+                    mouvement(rendu,LinkActuel,&positionjoueur,carte,keys,&direction);
                     if (devantPort(positionjoueur, rendu, carte)){
                         SDL_DestroyWindow(window);
-                        initialiserCarte(carte);
                         continuer=2;
                         maison(fond);
                     }
+
+
                     switch (event.key.keysym.sym){
                         case SDLK_ESCAPE:
                             continuer = 0;
                             break;
                         case SDLK_SPACE:
-                            epee(LinkActuel, positionjoueur, rendu, carte);
+                            epee(LinkActuel, positionjoueur, rendu, carte, direction);
                             break;
                         case SDLK_c:
                             celebretion(positionjoueur,rendu);

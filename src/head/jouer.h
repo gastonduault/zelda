@@ -24,7 +24,7 @@ enum
 };
 
 int carte[35][45];
-
+int direction;
 
 void jouer(SDL_Surface *fond);
 
