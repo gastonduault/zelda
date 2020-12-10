@@ -28,7 +28,7 @@ Petit jeu en C avec la bibliothèque SDL 2.0
         <strong>haut :</strong> flèche du haut du pavé numérique
     </li>
     <li>
-        <strong>sortir épée :</strong> escpace
+        <strong>sortir épée :</strong> espace
     </li>
     <li>
         <strong>Quitter :</strong> Touche échape
