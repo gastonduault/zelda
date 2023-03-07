@@ -1,5 +1,5 @@
 <h1>Zelda</h1> 
-Petit jeu en C avec la bibliothèque SDL 2.0
+Petit jeu avec link en C avec la bibliothèque SDL 2.0 
 <br />
 <br />
 <ul><li>encore en cour de création</li>
